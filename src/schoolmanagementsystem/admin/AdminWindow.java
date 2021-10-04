@@ -13,11 +13,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import java.sql.*;
 
 
 
 public class AdminWindow extends javax.swing.JFrame {
     
+     private static String adminUsername, adminPassword;    
      private static String adminUser,adminPass;
      public static String filepath = "src\\schoolmanagementsystem\\admin\\admins.json";
      private static JSONParser jsonParser = new JSONParser();
@@ -25,7 +27,18 @@ public class AdminWindow extends javax.swing.JFrame {
      private static JSONObject creds = new JSONObject();
      private static JSONArray asadmin = new JSONArray();
      private static JSONObject userDetails = new JSONObject();
+     
+     
     
+   public static Admin fromJSON (JSONObject obj, int arrayIndex) {
+        int adminID = (int) (long) obj.get("id");
+        String adminUsername = (String) obj.get("username");
+        String adminPassword = (String) obj.get("password");
+        Admin adm = new Admin(adminID, adminUsername, adminPassword);
+        adm.setArrayIndex(arrayIndex);
+        return adm;
+    }
+   
    
     public AdminWindow() {
         initComponents();
@@ -138,13 +151,67 @@ public class AdminWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_AdminUserActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        
+        int adminuser = 0;
+        String password = null, position = null;
+        boolean employeeFound = false;
+        adminUsername = AdminUser.getText();
+        adminPassword = new String(AdminPass.getPassword());
+        
+        
+        try {
+            boolean hasMissingField = false;
+            hasMissingField = requiredDetails();
+            String sqlStatement06 = "SELECT * FROM admins WHERE admin_username = " + adminUsername;
+            PreparedStatement sqlquery06 = DbaseConnectionAdmin.connect.prepareStatement(sqlStatement06);
+            ResultSet result06 = sqlquery06.executeQuery();
+            System.out.println(sqlquery06);
 
-            
-        
-        
-        
-        
-        
+            while(result06.next()){
+                employeeFound = true;
+
+                adminUsername = result06.getString("admin_username");
+
+                adminPassword = result06.getString("admin_password");
+
+                System.out.println("");
+
+
+            }
+
+            //get from goooey
+
+            if (employeeFound == false){
+                JOptionPane.showMessageDialog(
+                    getContentPane(),
+                    "Employee does not exist!",
+                    "",
+                    JOptionPane.ERROR_MESSAGE
+                    );
+                    clearFields();
+                    
+            } else {
+                
+               if (adminPassword.equals(password)){
+                   System.out.println("");
+
+                } else {
+                   JOptionPane.showMessageDialog(
+                    getContentPane(),
+                    "Wrong Password",
+                    "",
+                    JOptionPane.ERROR_MESSAGE
+                    );
+                    clearFields();
+                }
+
+
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     
@@ -180,30 +247,28 @@ public class AdminWindow extends javax.swing.JFrame {
         });
         
     }
-    public static void filecheck() throws FileNotFoundException, IOException, ParseException{
-        FileReader reader = new FileReader(filepath);
-        if(reader.ready()){
-            Scanner sc = new Scanner (reader);
-            String line = " ";
-            
-            while(sc.hasNext()){
-                line = line + sc.nextLine();
-            }
-            if(!line.equals(" ")){
-                reader.close();
-                FileReader reader2 = new FileReader(filepath);
-                creds = (JSONObject) jsonParser.parse(reader2);
-                asadmin = (JSONArray) creds.get("user");
-                reader2.close();
-            }
+    
+    
+    private boolean requiredDetails() {
+        if(AdminUser.getText().length() == 0) {
+            JOptionPane.showMessageDialog(
+                getContentPane(),
+                "Employee ID is required.",
+                "",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return true;
         }
+        return false;
     }
-         
-    public static void save() throws IOException{
-        FileWriter file = new FileWriter(AdminWindow.filepath);
-        file.write(creds.toJSONString());
-        file.close();
+
+    private void clearFields() {
+        AdminUser.setText(" ");
+        AdminPass.setText(" ");
     }
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField AdminPass;
     private javax.swing.JTextField AdminUser;
