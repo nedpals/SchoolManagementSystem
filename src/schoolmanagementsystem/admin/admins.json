@@ -1,6 +1,9 @@
-{
-    
+
+[
+    {
     "id" : 1,
-    "user": "adminHere",
+    "username": "adminHere",
     "password": "admin1234"
-}
+    }
+    
+]
