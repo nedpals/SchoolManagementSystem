@@ -15,6 +15,7 @@ import org.json.simple.parser.JSONParser;
 
 interface JSONNable {
     JSONObject toJSON();
+    void setArrayIndex(int newIndex);
 }
 
 class Table {
