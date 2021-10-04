@@ -5,7 +5,6 @@
  */
 package schoolmanagementsystem;
 
-import java.util.Date;
 import java.util.Iterator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -65,6 +64,10 @@ public class Session {
         Session sess = new Session(id, heldAt, subjectID, title, description, attendanceIds);
         sess.setArrayIndex(arrayIndex);
         return sess;
+    }
+    
+    public void getSubject() throws Exception {
+        throw new Exception("Not implemented yet!");
     }
     
     public JSONObject toJSON() {

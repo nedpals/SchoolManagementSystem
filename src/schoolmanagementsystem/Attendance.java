@@ -30,9 +30,9 @@ public class Attendance {
         this.updatedAt = updatedAt;
     }
     
-//    public Student getStudent() {
-//        
-//    }
+    public void getStudent() throws Exception {
+        throw new Exception("Not implemented yet!");
+    }
     
     public Session getSession() throws Exception {
         return Session.getById(this.sessionId);
