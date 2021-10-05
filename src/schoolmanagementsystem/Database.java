@@ -13,9 +13,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-interface JSONNable {
-    JSONObject toJSON();
-    void setArrayIndex(int newIndex);
+abstract class DBEntity {
+    private int arrayIndex = -1;
+    
+    public abstract JSONObject toJSON();
+    public abstract void setArrayIndex(int newIndex);
+    public abstract void save() throws Exception;
 }
 
 class Table {
@@ -38,7 +41,7 @@ class Table {
         this.save();
     }
     
-    public void insert(JSONNable obj) throws Exception {
+    public void insert(DBEntity obj) throws Exception {
         this.data.add(obj.toJSON());
         this.save();
     }
@@ -48,7 +51,7 @@ class Table {
         this.save();
     }
     
-    public void update(int index, JSONNable obj) throws Exception {
+    public void update(int index, DBEntity obj) throws Exception {
         this.data.set(index, obj.toJSON());
         this.save();
     }
