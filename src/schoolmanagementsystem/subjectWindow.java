@@ -5,6 +5,9 @@
  */
 package schoolmanagementsystem;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User
@@ -36,7 +39,7 @@ public class subjectWindow extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        sessionTable = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -71,10 +74,10 @@ public class subjectWindow extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        sessionTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
+                {"1", "July 5, 2021", "July 6,2021"},
+                {"2", "September 16, 2021", "September 20, 2021"},
                 {null, null, null},
                 {null, null, null}
             },
@@ -82,7 +85,7 @@ public class subjectWindow extends javax.swing.JFrame {
                 "Session Number", "Session Date", "Date Posted"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(sessionTable);
 
         jButton6.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         jButton6.setText("Edit");
@@ -94,6 +97,11 @@ public class subjectWindow extends javax.swing.JFrame {
 
         jButton7.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         jButton7.setText("Delete");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         jButton8.setText("Add Session");
@@ -196,6 +204,17 @@ public class subjectWindow extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) sessionTable.getModel();
+        
+        try{
+            int SelectedRow = sessionTable.getSelectedRow();
+            model.removeRow(SelectedRow);
+        }catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -244,6 +263,6 @@ public class subjectWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable sessionTable;
     // End of variables declaration//GEN-END:variables
 }

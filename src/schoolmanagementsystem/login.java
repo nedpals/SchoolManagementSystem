@@ -153,7 +153,7 @@ public class login extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         try{
-            professor.login(profUsername.getText(), profPassword.getText());
+            Professor.login(profUsername.getText(), profPassword.getText());
             JOptionPane.showMessageDialog(null, "Welcome");
             dashboard dash = new dashboard();
             dash.setVisible(true);

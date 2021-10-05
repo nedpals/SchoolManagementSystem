@@ -160,5 +160,22 @@ public class Professor extends User {
        sub.save();
     }
     
+    public void createNote (Subject sub, Note note)throws Exception{
+        note.save();
+        int[] newNoteIds = new int[sub.noteIds.length+1];
+       for(int i = 0; i<sub.noteIds.length; i++){
+           newNoteIds[i] = sub.noteIds[i];
+       }
+       newNoteIds[newNoteIds.length-1] = note.id;
+       sub.sessionIds = newNoteIds;
+       sub.save();
+    }
+    
+    public void deleteNote(Subject sub, Note note)throws Exception{
+        Table table = Database.get("notes");
+        
+    }
+    
+    
 }
 
