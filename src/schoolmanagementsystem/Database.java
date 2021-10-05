@@ -14,11 +14,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 abstract class DBEntity {
-    private int arrayIndex = -1;
+    protected int arrayIndex = -1;
     
     public abstract JSONObject toJSON();
-    public abstract void setArrayIndex(int newIndex);
     public abstract void save() throws Exception;
+    
+    public void setArrayIndex(int newIndex) {
+        this.arrayIndex = newIndex;
+    }
 }
 
 class Table {

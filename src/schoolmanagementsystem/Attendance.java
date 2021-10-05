@@ -19,7 +19,6 @@ public class Attendance extends DBEntity {
     public boolean isPresent;
     public String reason;
     public Date2 updatedAt;
-    private int arrayIndex = -1;
     
     Attendance(int id, int studentId, int sessionId, boolean isPresent, String reason, Date2 updatedAt) {
         this.id = id;
@@ -65,11 +64,6 @@ public class Attendance extends DBEntity {
         obj.put("reason", reason);
         obj.put("updatedAt", updatedAt);
         return obj;
-    }
-    
-    @Override
-    public void setArrayIndex(int newIndex) {
-        this.arrayIndex = newIndex;
     }
     
     @Override

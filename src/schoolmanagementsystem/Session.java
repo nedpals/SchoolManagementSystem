@@ -89,11 +89,6 @@ public class Session extends DBEntity {
     }
     
     @Override
-    public void setArrayIndex(int newIndex) {
-        this.arrayIndex = newIndex;
-    }
-    
-    @Override
     public void save() throws Exception {
         Table table = Database.get("sessions");
         

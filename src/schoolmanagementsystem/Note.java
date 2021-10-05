@@ -71,11 +71,6 @@ public class Note extends DBEntity {
     }
 
     @Override
-    public void setArrayIndex(int newIndex) {
-        this.arrayIndex = newIndex;
-    }
-
-    @Override
     public void save() throws Exception {
         Table table = Database.get("notes");
         if (this.arrayIndex == -1) {
