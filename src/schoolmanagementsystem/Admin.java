@@ -71,7 +71,7 @@ public class Admin extends User {
             adminTable.update(this.arrayIndex, this);
         }
     }
-<<<<<<< HEAD
+
     
     public static Admin getByUsername(String username) throws Exception {
         Iterator sessionsIt = Database.get("admins").all().iterator();
@@ -105,8 +105,8 @@ public class Admin extends User {
     @Override
     public void logout() {
        this.logout();
-=======
-
+    }
+    /*    
     @Override
     public void login(String username, String password) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -117,4 +117,6 @@ public class Admin extends User {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 >>>>>>> 5896a80fbb679303fe4a5663fef61b8f68e8dfb2
     }
-}
+*/
+ }
+
