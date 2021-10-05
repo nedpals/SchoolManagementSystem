@@ -13,7 +13,7 @@ import org.json.simple.JSONObject;
  *
  * @author nedpals
  */
-public class Session {
+public class Session extends DBEntity {
     public int id;
     public Date2 heldAt;
     public int subjectId;
@@ -70,6 +70,7 @@ public class Session {
         throw new Exception("Not implemented yet!");
     }
     
+    @Override
     public JSONObject toJSON() {
         JSONObject obj = new JSONObject();
         obj.put("id", id);
@@ -87,10 +88,12 @@ public class Session {
         return obj;
     }
     
+    @Override
     public void setArrayIndex(int newIndex) {
         this.arrayIndex = newIndex;
     }
     
+    @Override
     public void save() throws Exception {
         Table table = Database.get("sessions");
         

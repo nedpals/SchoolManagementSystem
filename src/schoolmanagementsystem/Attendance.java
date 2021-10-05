@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
  *
  * @author nedpals
  */
-public class Attendance {
+public class Attendance extends DBEntity {
     public int id;
     public int studentId;
     public int sessionId;
@@ -38,8 +38,8 @@ public class Attendance {
         return Session.getById(this.sessionId);
     }
     
-    public static Session fromJSON(JSONObject obj) throws Exception {
-        return Session.fromJSON(obj, -1);
+    public static Attendance fromJSON(JSONObject obj) throws Exception {
+        return Attendance.fromJSON(obj, -1);
     }
     
     public static Attendance fromJSON(JSONObject obj, int arrayIndex) throws Exception {
@@ -55,6 +55,7 @@ public class Attendance {
         return att;
     }
     
+    @Override
     public JSONObject toJSON() {
         JSONObject obj = new JSONObject();
         obj.put("id", id);
@@ -66,17 +67,19 @@ public class Attendance {
         return obj;
     }
     
+    @Override
     public void setArrayIndex(int newIndex) {
         this.arrayIndex = newIndex;
     }
     
+    @Override
     public void save() throws Exception {
         Table table = Database.get("attendances");
         
         if (this.arrayIndex == -1) {
-            table.insert(this.toJSON());
+            table.insert(this);
         } else {
-            table.update(this.arrayIndex, this.toJSON());
+            table.update(this.arrayIndex, this);
         }
     }
 }

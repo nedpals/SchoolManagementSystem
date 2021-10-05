@@ -12,7 +12,7 @@ import org.json.simple.JSONArray;
  *
  * @author nedpals
  */
-public class Admin {
+public class Admin extends DBEntity {
     public int id;
     public String username;
     private String password;
@@ -71,9 +71,9 @@ public class Admin {
         Table adminTable = Database.get("admins");
         
         if (this.arrayIndex == -1) {
-            adminTable.insert(this.toJSON());
+            adminTable.insert(this);
         } else {
-            adminTable.update(this.arrayIndex, this.toJSON());
+            adminTable.update(this.arrayIndex, this);
         }
     }
 }
