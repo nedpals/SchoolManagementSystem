@@ -9,19 +9,11 @@ import javax.swing.JOptionPane;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import schoolmanagementsystem.Admin;
+import schoolmanagementsystem.Database;
 
 
 public class addAdminFrame extends javax.swing.JFrame {
-    
-    public JSONObject toJSON() {
-        JSONObject obj = new JSONObject();
-        obj.put("id", this.idTextField);
-        obj.put("username", this.newAdminUser);
-        obj.put("password", this.newAdminPass);
-        return obj;
-    }
-
-    
     
     public addAdminFrame() {
         initComponents();
@@ -135,13 +127,15 @@ public class addAdminFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_newAdminUserActionPerformed
 
     private void setAdminBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setAdminBTNActionPerformed
-        // TODO add your handling code here:
-        JSONObject obj = new JSONObject();
-        obj.put("id", this.idTextField);
-        obj.put("username", this.newAdminUser);
-        obj.put("password", this.newAdminPass);
-        setVisible(false);
-        dispose();
+
+        try{
+        Admin newAdmins = new Admin(idTextField, newAdminUser.getText(), newAdminPass.getText());
+        newAdmins.save();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+        
+        
     }//GEN-LAST:event_setAdminBTNActionPerformed
 
     

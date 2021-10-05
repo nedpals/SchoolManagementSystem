@@ -13,24 +13,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import java.sql.*;
+import schoolmanagementsystem.Admin;
+import schoolmanagementsystem.Database;
+
 
 
 
 public class AdminWindow extends javax.swing.JFrame {
     
-     private static String adminUsername, adminPassword;    
-       
-   public static Admin fromJSON (JSONObject obj, int arrayIndex) {
-        int adminID = (int) (long) obj.get("id");
-        String adminUsername = (String) obj.get("username");
-        String adminPassword = (String) obj.get("password");
-        Admin adm = new Admin(adminID, adminUsername, adminPassword);
-        adm.setArrayIndex(arrayIndex);
-        return adm;
-    }
-   
-   
+     
     public AdminWindow() {
         initComponents();
     }
@@ -143,8 +134,17 @@ public class AdminWindow extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
        
+        try{
+            Admin.login(AdminUser.getText(), AdminPass.getText());
+            JOptionPane.showMessageDialog(null, "Welcome!!");
+            AdminContentWindow frame = new AdminContentWindow();
+            frame.setVisible(true);
+            dispose();
+       } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+       }
         
-
+        
     }//GEN-LAST:event_loginButtonActionPerformed
 
     
@@ -171,7 +171,11 @@ public class AdminWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AdminWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        try{
+            Database.connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -180,26 +184,6 @@ public class AdminWindow extends javax.swing.JFrame {
         });
         
     }
-    
-    
-    private boolean requiredDetails() {
-        if(AdminUser.getText().length() == 0) {
-            JOptionPane.showMessageDialog(
-                getContentPane(),
-                "Admin Where??",
-                "",
-                JOptionPane.ERROR_MESSAGE
-            );
-            return true;
-        }
-        return false;
-    }
-
-    private void clearFields() {
-        AdminUser.setText(" ");
-        AdminPass.setText(" ");
-    }
-    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

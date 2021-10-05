@@ -5,6 +5,8 @@
  */
 package schoolmanagementsystem;
 
+import java.util.Iterator;
+import javax.swing.JOptionPane;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
@@ -12,11 +14,8 @@ import org.json.simple.JSONArray;
  *
  * @author nedpals
  */
-public class Admin extends DBEntity {
+public class Admin extends User {
     public int id;
-    public String username;
-    private String password;
-    private int arrayIndex = -1;
     
     Admin(int id, String username, String password) {
         this.id = id;
@@ -28,7 +27,7 @@ public class Admin extends DBEntity {
         return Admin.fromJSON(obj, -1);
     }
     
-    public static Admin fromJSON(JSONObject obj, int arrayIndex) {
+    public static Admin fromJSON (JSONObject obj, int arrayIndex) {
         int adminID = (int) (long) obj.get("id");
         String adminUsername = (String) obj.get("username");
         String adminPassword = (String) obj.get("password");
@@ -75,5 +74,39 @@ public class Admin extends DBEntity {
         } else {
             adminTable.update(this.arrayIndex, this);
         }
+    }
+    
+    public static Admin getByUsername(String username) throws Exception {
+        Iterator sessionsIt = Database.get("admins").all().iterator();
+        
+        while (sessionsIt.hasNext()) {
+            JSONObject data = (JSONObject) sessionsIt.next();
+            if (data.containsKey("username")) {
+                String adminUser = (String) data.get("username");
+                if (!adminUser.equals(username)){
+                    continue;
+                }
+                return Admin.fromJSON(data);
+            }
+        }
+        
+        throw new Exception("Admin not found!");
+    }
+    
+    
+    
+    public static Admin login(String username, String password) throws Exception {
+         Admin foundAdmin = Admin.getByUsername(username);
+         if (foundAdmin.password.equals(password)){
+             return foundAdmin;
+         } else {
+             throw new Exception("Password inputted is incorrect");
+                     
+         }
+    }
+    
+    @Override
+    public void logout() {
+       this.logout();
     }
 }
