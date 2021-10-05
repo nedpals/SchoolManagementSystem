@@ -14,14 +14,14 @@ import org.json.simple.JSONObject;
  */
 public class Note extends DBEntity {
     public int id;
-    public int subjectId;
+    public String subjectId;
     public int professorId;
     public String title;
     public String content;
     public Date2 updatedAt;
     private int arrayIndex = -1;
     
-    Note(int id, int subjectId, String title, String content, Date updatedAt) {
+    Note(int id, String subjectId, String title, String content, Date updatedAt) {
         this.id = id;
         this.subjectId = subjectId;
         this.title = title;
@@ -29,7 +29,7 @@ public class Note extends DBEntity {
         this.updatedAt = new Date2(updatedAt);
     }
     
-    Note(int id, int subjectId, String title, String content, Date2 updatedAt) {
+    Note(int id, String subjectId, String title, String content, Date2 updatedAt) {
         this.id = id;
         this.subjectId = subjectId;
         this.title = title;
@@ -37,8 +37,8 @@ public class Note extends DBEntity {
         this.updatedAt = updatedAt;
     }
 
-    public void getSubject() throws Exception {
-        throw new UnsupportedOperationException("Not implemented yet.");
+    public Subject getSubject() throws Exception {
+        return Subject.getById(subjectId);
     }
     
     public void getProfessor() throws Exception {
@@ -51,7 +51,7 @@ public class Note extends DBEntity {
     
     public static Note fromJSON(JSONObject obj, int arrayIndex) throws Exception {
         int id = (int) (long) obj.get("id");
-        int subjectId = (int) (long) obj.get("subjectId");
+        String subjectId = (String) obj.get("subjectId");
         String title = (String) obj.get("title");
         String content = (String) obj.get("content");
         Date2 updatedAt = Date2.fromJSON((String) obj.get("updatedAt"));
