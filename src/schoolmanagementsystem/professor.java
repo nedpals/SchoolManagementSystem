@@ -13,49 +13,37 @@ import org.json.simple.JSONObject;
  *
  * @author User
  */
-public class professor {
+public class Professor extends User {
     public int id;
-    public String username;
-    private String password;
     public String name;
-    public String handledSubjects;
+    public String[] handledSubjectIds;
     public String department;
-    private int arrayIndex = -1;
     
     
-    professor(int id, String username, String password, String name, String handledSubjects, String department){
     
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.handledSubjects = handledSubjects;
-        this.department = department;
-        
-}   
-    professor(int id, String username, String password, String name, String handledSubjects, String department, int arrayIndex){
+    Professor(int id, String username, String password, String name, String[] handledSubjectIds, String department, int arrayIndex1){
     
         this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
-        this.handledSubjects = handledSubjects;
+        this.handledSubjectIds = handledSubjectIds;
         this.department = department;
-        this.arrayIndex = arrayIndex;
         
 }   
-    public static professor fromJSON(JSONObject obj){
-        return professor.fromJSON(obj, -1);
+    
+    public static Professor fromJSON(JSONObject obj){
+        return Professor.fromJSON(obj, -1);
     }
 
-    public static professor fromJSON(JSONObject obj, int arrayIndex){
+    public static Professor fromJSON(JSONObject obj, int arrayIndex){
         int profID = (int)(long) obj.get("id");
         String profUsername = (String) obj.get("username");
         String profPassword = (String) obj.get("password");
         String profName = (String) obj.get("name");
-        String profSubjects = (String) obj.get("handledSubjects");
+        String[] profHandledSubjectIds = (String[]) obj.get("handledSubjectIds");
         String profDepartment = (String) obj.get("department");
-        return new professor(profID, profUsername, profPassword, profName, profSubjects, profDepartment, arrayIndex);   
+        return new Professor(profID, profUsername, profPassword, profName, profHandledSubjectIds, profDepartment, arrayIndex);   
     }
     
     
@@ -65,19 +53,19 @@ public class professor {
         obj.put("username", this.username);
         obj.put("password", this.password);
         obj.put("name", this.name);
-        obj.put("handledSubjects", this.handledSubjects);
+        obj.put("handledSubjectIds", this.handledSubjectIds);
         obj.put("department", this.department);
         return obj;
     }
     //getAll()
-    public static professor[] getAll(){
+    public static Professor[] getAll(){
        try{
            JSONArray data = Database.get("professors").all();
-           professor[] professors = new professor[(data.size())];
+           Professor[] professors = new Professor[(data.size())];
            
            for (int i = 0; i<data.size(); i++){
                JSONObject obj = (JSONObject) data.get(i);
-               professor prof = professor.fromJSON(obj, i);
+               Professor prof = Professor.fromJSON(obj, i);
                professors[i] = prof;
                
            }
@@ -97,7 +85,7 @@ public class professor {
             professorTable.update(this.arrayIndex, this.toJSON());
         }
     }
-    public static professor getByUsername(String username) throws Exception {
+    public static Professor getByUsername(String username) throws Exception {
         Iterator professorsIt = Database.get("professors").all().iterator();
         
         while (professorsIt.hasNext()) {
@@ -107,15 +95,15 @@ public class professor {
                 if (!adminUser.equals(username)){
                     continue;
                 }
-                return professor.fromJSON(data);
+                return Professor.fromJSON(data);
             }
         }
         
         throw new Exception("Admin not found!");
     }
     
-    public static professor login(String username, String password) throws Exception{
-        professor foundProfessor = professor.getByUsername(username);
+    public static Professor login(String username, String password) throws Exception{
+        Professor foundProfessor = Professor.getByUsername(username);
          if (foundProfessor.password.equals(password)){
              return foundProfessor;
          } else {
@@ -128,22 +116,49 @@ public class professor {
         this.logout();
     }
     
-    public static professor getById(String id) throws Exception {
+    public static Professor getById(int id) throws Exception {
         Iterator professorIt = Database.get("professors").all().iterator();
         
         while (professorIt.hasNext()) {
             JSONObject data = (JSONObject) professorIt.next();
             if (data.containsKey("id")) {
-                String subjectId = (String)data.get("id");
-                if(!subjectId.equals(id)){
+                int professorId = (int)data.get("id");
+                if(professorId != id){
                     continue;                  
                 }
-                return professor.fromJSON(data);
+                return Professor.fromJSON(data);
             }
         }
         
         throw new Exception("Professor not found!");
     }
-     
+    
+    public Subject[] getHandledSubjects()throws Exception{
+        Subject[] subjects = new Subject[handledSubjectIds.length];
+        for (int i = 0; i < handledSubjectIds.length; i++) {
+            subjects[i] = Subject.getById(handledSubjectIds[i]);
+        }
+        return subjects;
+    }   
+    public void createSubject(Subject subject)throws Exception{
+        subject.professorId = this.id;
+        subject.save();
+    }
+        
+    public void deleteSubject(Subject subject)throws Exception{
+        Table table = Database.get("subjects");
+     //   table.remove(subject.);
+    }
+    public void createSession (Subject sub, Session session)throws Exception{
+        session.save();
+        int[] newSessionIds = new int[sub.sessionIds.length+1];
+       for(int i = 0; i<sub.sessionIds.length; i++){
+           newSessionIds[i] = sub.sessionIds[i];
+       }
+       newSessionIds[newSessionIds.length-1] = session.id;
+       sub.sessionIds = newSessionIds;
+       sub.save();
+    }
     
 }
+
