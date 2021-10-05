@@ -5,6 +5,7 @@
  */
 package schoolmanagementsystem;
 
+import java.util.Iterator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -32,15 +33,31 @@ public class professor {
         this.department = department;
         
 }   
+    professor(int id, String username, String password, String name, String handledSubjects, String department, int arrayIndex){
+    
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.handledSubjects = handledSubjects;
+        this.department = department;
+        this.arrayIndex = arrayIndex;
+        
+}   
     public static professor fromJSON(JSONObject obj){
+        return professor.fromJSON(obj, -1);
+    }
+
+    public static professor fromJSON(JSONObject obj, int arrayIndex){
         int profID = (int)(long) obj.get("id");
         String profUsername = (String) obj.get("username");
         String profPassword = (String) obj.get("password");
         String profName = (String) obj.get("name");
         String profSubjects = (String) obj.get("handledSubjects");
         String profDepartment = (String) obj.get("department");
-        return new professor(profID, profUsername, profPassword, profName, profSubjects, profDepartment);   
+        return new professor(profID, profUsername, profPassword, profName, profSubjects, profDepartment, arrayIndex);   
     }
+    
     
     public JSONObject toJSON(){
         JSONObject obj = new JSONObject();
@@ -60,7 +77,7 @@ public class professor {
            
            for (int i = 0; i<data.size(); i++){
                JSONObject obj = (JSONObject) data.get(i);
-               professor prof = professor.fromJSON(obj);
+               professor prof = professor.fromJSON(obj, i);
                professors[i] = prof;
                
            }
@@ -69,8 +86,64 @@ public class professor {
            System.out.println(ex);
            return null;
        }
-        
-        
+   
     }
-  
+    //save()
+    public void save()throws Exception {
+        Table professorTable = Database.get("professors");
+        if(arrayIndex == -1){
+            professorTable.insert(this.toJSON());
+        }else{
+            professorTable.update(this.arrayIndex, this.toJSON());
+        }
+    }
+    public static professor getByUsername(String username) throws Exception {
+        Iterator professorsIt = Database.get("professors").all().iterator();
+        
+        while (professorsIt.hasNext()) {
+            JSONObject data = (JSONObject) professorsIt.next();
+            if (data.containsKey("username")) {
+                String adminUser = (String) data.get("username");
+                if (!adminUser.equals(username)){
+                    continue;
+                }
+                return professor.fromJSON(data);
+            }
+        }
+        
+        throw new Exception("Admin not found!");
+    }
+    
+    public static professor login(String username, String password) throws Exception{
+        professor foundProfessor = professor.getByUsername(username);
+         if (foundProfessor.password.equals(password)){
+             return foundProfessor;
+         } else {
+             throw new Exception("Password is incorrect");
+                     
+         }
+    }
+   
+    public void logout(){
+        this.logout();
+    }
+    
+    public static professor getById(String id) throws Exception {
+        Iterator professorIt = Database.get("professors").all().iterator();
+        
+        while (professorIt.hasNext()) {
+            JSONObject data = (JSONObject) professorIt.next();
+            if (data.containsKey("id")) {
+                String subjectId = (String)data.get("id");
+                if(!subjectId.equals(id)){
+                    continue;                  
+                }
+                return professor.fromJSON(data);
+            }
+        }
+        
+        throw new Exception("Professor not found!");
+    }
+     
+    
 }
