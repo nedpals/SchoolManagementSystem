@@ -7,11 +7,15 @@ package schoolmanagementsystem.Subject_Class;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import schoolmanagementsystem.Database;
+import schoolmanagementsystem.Subject;
 import schoolmanagementsystem.Subject_Class.SubjectMain;
 import static schoolmanagementsystem.Subject_Class.SubjectMain.subjectPath;
 /**
@@ -19,7 +23,6 @@ import static schoolmanagementsystem.Subject_Class.SubjectMain.subjectPath;
  * @author Parcasio
  */
 public class Search extends javax.swing.JFrame {
-
     /**
      * Creates new form Search
      */
@@ -76,61 +79,64 @@ public class Search extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-       JSONParser parser = new JSONParser();
+
       String search;
       search = searchField.getText();
+      
       try{
-          Object obj = parser.parse(new FileReader(subjectPath));
-          JSONObject jsonObject = (JSONObject) obj;
-          String searchID = (String) jsonObject.get("subjectID");      
-          String searchName = (String) jsonObject.get("subjectName");
-          if(searchID.equals(search)||searchName.equals(search)){
-              Search_Result frame = new Search_Result();
-              frame.setVisible(true);
-              this.dispose();
-          }else{
-              JOptionPane.showMessageDialog(null,"Invalid ID");
-          }
+         Subject[] results = Subject.search(search); 
+         Search_Result frame = new Search_Result(results);
+         frame.setVisible(true);
+         frame.loadSubjectsToTable();
+         this.dispose();
       }
-      catch(FileNotFoundException e){e.printStackTrace();}
-      catch(IOException e){e.printStackTrace();}
-      catch(ParseException e){e.printStackTrace();}
-      catch(Exception e){e.printStackTrace();}
+      catch(Exception e){
+          JOptionPane.showMessageDialog(null, e.getMessage());
+          searchField.setText("");
+      }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Search().setVisible(true);
+        try {
+            
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+            * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+            */
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
+                }
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-        });
+            //</editor-fold>
+            Database.connect();
+            
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new Search().setVisible(true);
+                }
+            });
+        } catch (Exception ex) {
+            Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
