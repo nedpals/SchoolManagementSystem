@@ -29,7 +29,7 @@ public class Admin {
         String adminPassword = (String) obj.get("password");
         Admin adm = new Admin(adminID, adminUsername, adminPassword);
         adm.setArrayIndex(arrayIndex);
-        return adm;
+        return adm; 
     }
     
     public JSONObject toJSON() {

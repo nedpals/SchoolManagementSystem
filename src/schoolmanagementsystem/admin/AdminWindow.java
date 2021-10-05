@@ -20,16 +20,7 @@ import java.sql.*;
 public class AdminWindow extends javax.swing.JFrame {
     
      private static String adminUsername, adminPassword;    
-     private static String adminUser,adminPass;
-     public static String filepath = "src\\schoolmanagementsystem\\admin\\admins.json";
-     private static JSONParser jsonParser = new JSONParser();
-    
-     private static JSONObject creds = new JSONObject();
-     private static JSONArray asadmin = new JSONArray();
-     private static JSONObject userDetails = new JSONObject();
-     
-     
-    
+       
    public static Admin fromJSON (JSONObject obj, int arrayIndex) {
         int adminID = (int) (long) obj.get("id");
         String adminUsername = (String) obj.get("username");
@@ -152,7 +143,70 @@ public class AdminWindow extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         
+<<<<<<< Updated upstream
        
+=======
+        String adminuser = null;
+        String adminpassword = null;
+        boolean adminFound = false;
+        adminUsername = AdminUser.getText();
+        adminPassword = new String(AdminPass.getPassword());
+        
+        
+        try {
+            boolean hasMissingField = false;
+            hasMissingField = requiredDetails();
+            String sqlStatement06 = "SELECT * FROM admins WHERE admin_username = " + adminUsername;
+            PreparedStatement sqlquery06 = DbaseConnectionAdmin.connect.prepareStatement(sqlStatement06);
+            ResultSet resultS = sqlquery06.executeQuery();
+            System.out.println(sqlquery06);
+
+            while(resultS.next()){
+                adminFound = true;
+
+                adminuser = resultS.getString("admin_username");
+
+                adminpassword = resultS.getString("admin_password");
+
+                System.out.println("");
+
+
+            }
+
+            //get from goooey
+
+            if (adminFound == false){
+                JOptionPane.showMessageDialog(
+                    getContentPane(),
+                    "Admin does not exist!",
+                    "",
+                    JOptionPane.ERROR_MESSAGE
+                    );
+                    clearFields();
+                    
+            } else {
+                
+               if (adminPassword.equals(adminpassword)){
+                   System.out.println("");
+
+                } else {
+                   JOptionPane.showMessageDialog(
+                    getContentPane(),
+                    "Wrong Password",
+                    "",
+                    JOptionPane.ERROR_MESSAGE
+                    );
+                    clearFields();
+                }
+
+
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+>>>>>>> Stashed changes
     }//GEN-LAST:event_loginButtonActionPerformed
 
     
@@ -194,7 +248,7 @@ public class AdminWindow extends javax.swing.JFrame {
         if(AdminUser.getText().length() == 0) {
             JOptionPane.showMessageDialog(
                 getContentPane(),
-                "Employee ID is required.",
+                "Admin Where??",
                 "",
                 JOptionPane.ERROR_MESSAGE
             );
