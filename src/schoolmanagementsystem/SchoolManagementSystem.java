@@ -17,6 +17,10 @@ public class SchoolManagementSystem {
     public static void main(String[] args) throws Exception {
         Database.connect();
         
+        professor[] professors = professor.getAll();
+        for(int i = 0; i<professors.length; i++){
+            System.out.printf("%s %s %s %s %s \n", professors[i].id, professors[i].username, professors[i].name, professors[i].department, professors[i].handledSubjects);
+        }
         
     }
     

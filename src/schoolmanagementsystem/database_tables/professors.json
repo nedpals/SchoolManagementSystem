@@ -1,1 +1,20 @@
-[]
+[
+    
+    {
+       "id": 1,
+        "username": "shobe",
+        "password": "123",
+        "name": "Shaira Montojo",
+        "handledSubjects": "Statistics",
+        "department": "Mathematics"
+    },
+    {
+       "id": 2,
+        "username": "bb",
+        "password": "123",
+        "name": "Chobot Montojo",
+        "handledSubjects": "Secret",
+        "department": "English"
+    }
+
+]
