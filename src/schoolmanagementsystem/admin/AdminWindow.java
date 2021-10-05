@@ -152,66 +152,7 @@ public class AdminWindow extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         
-        int adminuser = 0;
-        String password = null, position = null;
-        boolean employeeFound = false;
-        adminUsername = AdminUser.getText();
-        adminPassword = new String(AdminPass.getPassword());
-        
-        
-        try {
-            boolean hasMissingField = false;
-            hasMissingField = requiredDetails();
-            String sqlStatement06 = "SELECT * FROM admins WHERE admin_username = " + adminUsername;
-            PreparedStatement sqlquery06 = DbaseConnectionAdmin.connect.prepareStatement(sqlStatement06);
-            ResultSet result06 = sqlquery06.executeQuery();
-            System.out.println(sqlquery06);
-
-            while(result06.next()){
-                employeeFound = true;
-
-                adminUsername = result06.getString("admin_username");
-
-                adminPassword = result06.getString("admin_password");
-
-                System.out.println("");
-
-
-            }
-
-            //get from goooey
-
-            if (employeeFound == false){
-                JOptionPane.showMessageDialog(
-                    getContentPane(),
-                    "Employee does not exist!",
-                    "",
-                    JOptionPane.ERROR_MESSAGE
-                    );
-                    clearFields();
-                    
-            } else {
-                
-               if (adminPassword.equals(password)){
-                   System.out.println("");
-
-                } else {
-                   JOptionPane.showMessageDialog(
-                    getContentPane(),
-                    "Wrong Password",
-                    "",
-                    JOptionPane.ERROR_MESSAGE
-                    );
-                    clearFields();
-                }
-
-
-
-            }
-
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
+       
     }//GEN-LAST:event_loginButtonActionPerformed
 
     
