@@ -24,6 +24,10 @@ public class Date2 {
         this.rawDate = rawDate;
     }
     
+    public Date get() {
+        return this.rawDate;
+    }
+    
     public static Date2 fromJSON(String rawStrDate) throws Exception {
         Date gotDate = Date2.formatter.parse(rawStrDate);
         return new Date2(gotDate);
