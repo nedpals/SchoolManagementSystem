@@ -12,11 +12,8 @@ import org.json.simple.JSONArray;
  *
  * @author nedpals
  */
-public class Admin extends DBEntity {
+public class Admin extends User {
     public int id;
-    public String username;
-    private String password;
-    private int arrayIndex = -1;
     
     Admin(int id, String username, String password) {
         this.id = id;
@@ -63,10 +60,6 @@ public class Admin extends DBEntity {
         }
     }
     
-    public void setArrayIndex(int newIndex) {
-        this.arrayIndex = newIndex;
-    }
-    
     public void save() throws Exception {
         Table adminTable = Database.get("admins");
         
@@ -75,5 +68,15 @@ public class Admin extends DBEntity {
         } else {
             adminTable.update(this.arrayIndex, this);
         }
+    }
+
+    @Override
+    public void login(String username, String password) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void logout() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
