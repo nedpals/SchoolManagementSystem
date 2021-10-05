@@ -8,6 +8,7 @@ package schoolmanagementsystem;
 import java.util.Iterator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import java.util.Date;
 
 /**
  *
@@ -114,20 +115,52 @@ public class Subject extends DBEntity{
     public void getProfessor() throws Exception {
         throw new Exception("Not implemented yet!");
     }
+    
     public void getStudents() throws Exception {
         throw new Exception("Not implemented yet!");
     }
-    public void getNotes() throws Exception {
-        throw new Exception("Not implemented yet!");
+    
+    public Note[] getNotes() throws Exception {
+        Note[] notes = new Note[noteIds.length];
+        for (int i = 0; i < noteIds.length; i++) {
+            notes[i] = this.getNoteById(noteIds[i]);
+        }
+        return notes;
     }
-    public void getSessions() throws Exception {
-        throw new Exception("Not implemented yet!");
+    
+    public Session[] getSessions() throws Exception {
+        Session[] sessions = new Session[sessionIds.length];
+        for (int i = 0; i < noteIds.length; i++) {
+            sessions[i] = Session.getById(sessionIds[i]);
+        }
+        return sessions;
     }
-    public void getNoteById() throws Exception {
-        throw new Exception("Not implemented yet!");
+    
+    public Note getNoteById(int id) throws Exception {
+        Iterator notesIt = Database.get("notes").all().iterator();
+        
+        while (notesIt.hasNext()) {
+            JSONObject data = (JSONObject) notesIt.next();
+            if (data.containsKey("id") && (int) data.get("id") == id) {
+                return Note.fromJSON(data);
+            }
+        }
+        
+        throw new Exception("Note not found!");
     }
-    public void getSessionByDate() throws Exception {
-        throw new Exception("Not implemented yet!");
+    
+    public Session getSessionByDate(Date date) throws Exception {
+        for (int i = 0; i < sessionIds.length; i++) {
+            Session session = Session.getById(sessionIds[i]);
+            int diff = session.heldAt.get().compareTo(date);
+            if (diff == 0) {
+                return session;
+            } else if (diff > 0) {
+                break;
+            }
+        }
+        
+        throw new Exception("Session not found!");
     }
     
     @Override
