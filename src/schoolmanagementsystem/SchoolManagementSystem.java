@@ -5,6 +5,8 @@
  */
 package schoolmanagementsystem;
 
+import java.util.Arrays;
+
 /**
  *
  * @author nedpals
@@ -19,7 +21,7 @@ public class SchoolManagementSystem {
         
         Professor[] professors = Professor.getAll();
         for(int i = 0; i<professors.length; i++){
-            System.out.printf("%s %s %s %s %s \n", professors[i].id, professors[i].username, professors[i].name, professors[i].department, professors[i].handledSubjectIds);
+            System.out.printf("%s %s %s %s %s \n", professors[i].id, professors[i].username, professors[i].name, professors[i].department, Arrays.toString(professors[i].handledSubjectIds));
         }
         
     }
