@@ -22,12 +22,14 @@ import static schoolmanagementsystem.subject_gui.SubjectMain.subjectPath;
  *
  * @author Parcasio
  */
+
 public class Search extends javax.swing.JFrame {
     /**
      * Creates new form Search
      */
     public Search() {
         initComponents();
+      
     }
 
     /**
