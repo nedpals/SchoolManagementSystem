@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package schoolmanagementsystem;
+package schoolmanagementsystem.student_gui;
 import java.util.Iterator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import schoolmanagementsystem.Version;
-import schoolmanagementsystem.Settings;
-import schoolmanagementsystem.SubView;
-import schoolmanagementsystem.NotesView;
+import schoolmanagementsystem.student_gui.Version;
+import schoolmanagementsystem.student_gui.Settings;
+import schoolmanagementsystem.student_gui.SubView;
+import schoolmanagementsystem.student_gui.NotesView;
 /**
  *
  * @author japz3

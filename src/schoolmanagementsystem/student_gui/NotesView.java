@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package schoolmanagementsystem;
-import schoolmanagementsystem.SubjectView;
-import schoolmanagementsystem.NotsView;
+package schoolmanagementsystem.student_gui;
+import schoolmanagementsystem.student_gui.SubjectView;
+import schoolmanagementsystem.student_gui.NotsView;
 
 /**
  *

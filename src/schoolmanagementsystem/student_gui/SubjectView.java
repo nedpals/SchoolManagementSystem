@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package schoolmanagementsystem;
-import schoolmanagementsystem.SubView;
-import schoolmanagementsystem.NotesView;
+package schoolmanagementsystem.student_gui;
+import schoolmanagementsystem.student_gui.SubView;
+import schoolmanagementsystem.student_gui.NotesView;
 
 
 /**
@@ -162,7 +162,6 @@ public class SubjectView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane sScrollPane1;
     private javax.swing.JTable sTable1;
     private javax.swing.JButton stud_subViewNoteButton;
