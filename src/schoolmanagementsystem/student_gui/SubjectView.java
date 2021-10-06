@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package schoolmanagementsystem.student_gui;
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+import schoolmanagementsystem.Subject;
 import schoolmanagementsystem.student_gui.SubView;
 import schoolmanagementsystem.student_gui.NotesView;
 
@@ -13,12 +16,37 @@ import schoolmanagementsystem.student_gui.NotesView;
  * @author japz3
  */
 public class SubjectView extends javax.swing.JFrame {
+    private Subject[] subjects;
+     private DefaultTableModel resultTableModel;
+     SubjectView(Subject[] subjects) {
+         this.initComponents();
+         this.subjects = subjects;
+         this.resultTableModel = (DefaultTableModel) sTable1.getModel();
+     }
+    public void loadSubjectsToTable() {
+        resultTableModel.setRowCount(0);
+
+        for (int i = 0; i < subjects.length; i++) {
+            Subject sub = subjects[i];
+	  //Professor prof = sub.getProfessor();
+
+            Object[] fields = {
+                sub.id,
+	      sub.name,
+	      //prof.name
+            };
+
+            resultTableModel.addRow(fields);
+        }
+    }
 
     /**
      * Creates new form SubjectView
      */
     public SubjectView() {
         initComponents();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -34,7 +62,6 @@ public class SubjectView extends javax.swing.JFrame {
         stud_subjViewProfLabel = new javax.swing.JLabel();
         stud_subViewSessButton = new javax.swing.JButton();
         stud_subViewNoteButton = new javax.swing.JButton();
-        sScrollPane1 = new javax.swing.JScrollPane();
         sTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,16 +88,17 @@ public class SubjectView extends javax.swing.JFrame {
 
         sTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "", ""
             }
         ));
-        sScrollPane1.setViewportView(sTable1);
+        sTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sTable1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,17 +107,18 @@ public class SubjectView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                    .addComponent(stud_subjViewSubLabel)
+                    .addComponent(stud_subjViewProfLabel)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(stud_subjViewSubLabel)
-                            .addComponent(stud_subjViewProfLabel)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(stud_subViewSessButton)
-                                .addGap(31, 31, 31)
-                                .addComponent(stud_subViewNoteButton)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(stud_subViewSessButton)
+                        .addGap(31, 31, 31)
+                        .addComponent(stud_subViewNoteButton)))
+                .addContainerGap(477, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(7, Short.MAX_VALUE)
+                    .addComponent(sTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(7, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,9 +131,12 @@ public class SubjectView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(stud_subViewSessButton)
                     .addComponent(stud_subViewNoteButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(sScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(539, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(126, Short.MAX_VALUE)
+                    .addComponent(sTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         pack();
@@ -112,10 +144,7 @@ public class SubjectView extends javax.swing.JFrame {
 
     private void stud_subViewSessButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_subViewSessButtonActionPerformed
         // TODO add your handling code here:
-       SubView subv = new SubView();
-         subv.setLocationRelativeTo(this);
-        subv.setVisible(true);
-         this.dispose();
+       
     }//GEN-LAST:event_stud_subViewSessButtonActionPerformed
 
     private void stud_subViewNoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_subViewNoteButtonActionPerformed
@@ -125,6 +154,11 @@ public class SubjectView extends javax.swing.JFrame {
         noteview.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_stud_subViewNoteButtonActionPerformed
+
+    private void sTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sTable1MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_sTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -162,7 +196,6 @@ public class SubjectView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane sScrollPane1;
     private javax.swing.JTable sTable1;
     private javax.swing.JButton stud_subViewNoteButton;
     private javax.swing.JButton stud_subViewSessButton;

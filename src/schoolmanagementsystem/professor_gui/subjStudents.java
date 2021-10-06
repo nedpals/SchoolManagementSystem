@@ -28,48 +28,53 @@ public class subjStudents extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        sessionButton = new javax.swing.JButton();
+        notesButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        editSubjButton = new javax.swing.JButton();
+        deleteSubjButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        studentTable = new javax.swing.JTable();
+        addStudButton = new javax.swing.JButton();
+        dropStudButton = new javax.swing.JButton();
+        kickStudButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel1.setText("Subject Name");
 
-        jButton1.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jButton1.setText("Sessions");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        sessionButton.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        sessionButton.setText("Sessions");
+        sessionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                sessionButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jButton2.setText("Notes");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        notesButton.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        notesButton.setText("Notes");
+        notesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                notesButtonActionPerformed(evt);
             }
         });
 
         jButton3.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         jButton3.setText("Students");
 
-        jButton4.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jButton4.setText("Edit Subject");
+        editSubjButton.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        editSubjButton.setText("Edit Subject");
 
-        jButton5.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jButton5.setText("Delete Subject");
+        deleteSubjButton.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        deleteSubjButton.setText("Delete Subject");
+        deleteSubjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteSubjButtonActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        studentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -80,21 +85,21 @@ public class subjStudents extends javax.swing.JFrame {
                 "Student Name", "Section"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(studentTable);
 
-        jButton6.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jButton6.setText("Add Student");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        addStudButton.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        addStudButton.setText("Add Student");
+        addStudButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                addStudButtonActionPerformed(evt);
             }
         });
 
-        jButton7.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jButton7.setText("Drop");
+        dropStudButton.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        dropStudButton.setText("Drop");
 
-        jButton8.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jButton8.setText("Kick");
+        kickStudButton.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        kickStudButton.setText("Kick");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,9 +109,9 @@ public class subjStudents extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(sessionButton)
                         .addGap(32, 32, 32)
-                        .addComponent(jButton2)
+                        .addComponent(notesButton)
                         .addGap(32, 32, 32)
                         .addComponent(jButton3)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -116,16 +121,16 @@ public class subjStudents extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4)
+                                .addComponent(editSubjButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton5)))
+                                .addComponent(deleteSubjButton)))
                         .addGap(29, 29, 29))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton6)
+                        .addComponent(addStudButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton7)
+                        .addComponent(dropStudButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton8)
+                        .addComponent(kickStudButton)
                         .addGap(30, 30, 30))))
         );
         layout.setVerticalGroup(
@@ -134,44 +139,48 @@ public class subjStudents extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(editSubjButton)
+                    .addComponent(deleteSubjButton))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(sessionButton)
+                    .addComponent(notesButton)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8))
+                    .addComponent(addStudButton)
+                    .addComponent(dropStudButton)
+                    .addComponent(kickStudButton))
                 .addGap(37, 37, 37))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void notesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notesButtonActionPerformed
         subjNotes notes = new subjNotes();
         notes.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_notesButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void sessionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionButtonActionPerformed
         subjectWindow session = new subjectWindow();
         session.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_sessionButtonActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void addStudButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudButtonActionPerformed
         addStudent add = new addStudent();
         add.setVisible(true);
         this.dispose();
                 
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_addStudButtonActionPerformed
+
+    private void deleteSubjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSubjButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteSubjButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,16 +218,16 @@ public class subjStudents extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton addStudButton;
+    private javax.swing.JButton deleteSubjButton;
+    private javax.swing.JButton dropStudButton;
+    private javax.swing.JButton editSubjButton;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton kickStudButton;
+    private javax.swing.JButton notesButton;
+    private javax.swing.JButton sessionButton;
+    private javax.swing.JTable studentTable;
     // End of variables declaration//GEN-END:variables
 }

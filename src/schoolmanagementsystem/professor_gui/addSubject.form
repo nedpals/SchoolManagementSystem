@@ -32,8 +32,8 @@
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <Component id="subjectName" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="subjectNameTxt" alignment="0" max="32767" attributes="0"/>
+                              <Component id="subjUnitTxt" alignment="0" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" alignment="0" min="-2" pref="338" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="2" max="-2" attributes="0"/>
@@ -58,11 +58,11 @@
               <EmptySpace pref="43" max="32767" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="subjectName" min="-2" pref="37" max="-2" attributes="0"/>
+              <Component id="subjectNameTxt" min="-2" pref="37" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTextField2" min="-2" pref="37" max="-2" attributes="0"/>
+              <Component id="subjUnitTxt" min="-2" pref="37" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -94,9 +94,9 @@
         <Property name="text" type="java.lang.String" value="Name"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="subjectName">
+    <Component class="javax.swing.JTextField" name="subjectNameTxt">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subjectNameActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subjectNameTxtActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -107,7 +107,7 @@
         <Property name="text" type="java.lang.String" value="No. of Units"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="subjUnitTxt">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -124,7 +124,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="subjectDesc">
+        <Component class="javax.swing.JTextArea" name="subjectDescTxt">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>

@@ -59,6 +59,12 @@ public class addAdminFrame extends javax.swing.JFrame {
             }
         });
 
+        idTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idTextFieldActionPerformed(evt);
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Set ID:");
 
@@ -129,14 +135,20 @@ public class addAdminFrame extends javax.swing.JFrame {
     private void setAdminBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setAdminBTNActionPerformed
 
         try{
-        Admin newAdmins = new Admin(idTextField, newAdminUser.getText(), newAdminPass.getText());
-        newAdmins.save();
+            Admin newAdmins = new Admin(Integer.valueOf(idTextField.getText()),newAdminUser.getText(), newAdminPass.getText());
+            newAdmins.save();
+            JOptionPane.showMessageDialog(null, "Successfully Added as Admin");
+            dispose();
+        
         } catch (Exception e){
             JOptionPane.showMessageDialog(null,e.getMessage());
         }
         
-        
     }//GEN-LAST:event_setAdminBTNActionPerformed
+
+    private void idTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idTextFieldActionPerformed
 
     
     public static void main(String args[]) {
@@ -162,7 +174,11 @@ public class addAdminFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(addAdminFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        try{
+            Database.connect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

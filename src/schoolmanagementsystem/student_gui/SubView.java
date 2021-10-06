@@ -5,6 +5,8 @@
  */
 package schoolmanagementsystem.student_gui;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author japz3
@@ -16,6 +18,8 @@ public class SubView extends javax.swing.JFrame {
      */
     public SubView() {
         initComponents();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -29,7 +33,7 @@ public class SubView extends javax.swing.JFrame {
 
         stud_subSessLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        stud_subSessTextArea = new javax.swing.JTextArea();
+        stud_subSessLabelArea = new javax.swing.JLabel();
         stud_presButton = new javax.swing.JButton();
         stud_absButton = new javax.swing.JButton();
 
@@ -37,9 +41,7 @@ public class SubView extends javax.swing.JFrame {
 
         stud_subSessLabel.setText("Subject Session");
 
-        stud_subSessTextArea.setColumns(20);
-        stud_subSessTextArea.setRows(5);
-        jScrollPane1.setViewportView(stud_subSessTextArea);
+        jScrollPane1.setViewportView(stud_subSessLabelArea);
 
         stud_presButton.setText("Present");
 
@@ -49,18 +51,23 @@ public class SubView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(stud_subSessLabel))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(stud_subSessLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addComponent(stud_presButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(stud_absButton)))
+                        .addGap(0, 262, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(stud_presButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(stud_absButton)))
-                .addContainerGap(268, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,6 +126,6 @@ public class SubView extends javax.swing.JFrame {
     private javax.swing.JButton stud_absButton;
     private javax.swing.JButton stud_presButton;
     private javax.swing.JLabel stud_subSessLabel;
-    private javax.swing.JTextArea stud_subSessTextArea;
+    private javax.swing.JLabel stud_subSessLabelArea;
     // End of variables declaration//GEN-END:variables
 }

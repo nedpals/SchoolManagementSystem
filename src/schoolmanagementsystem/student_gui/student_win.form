@@ -52,6 +52,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sign Out"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stud_signoutMenuActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -115,14 +118,14 @@
                   <Component id="stud_subPanel4" max="32767" attributes="0"/>
                   <Component id="stud_subPanel7" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="stud_subPanel11" max="32767" attributes="0"/>
                   <Component id="stud_subPanel8" alignment="0" max="32767" attributes="0"/>
                   <Component id="stud_subPanel5" alignment="0" max="32767" attributes="0"/>
-                  <Component id="stud_subPanel2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="stud_subPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="stud_subPanel6" max="32767" attributes="0"/>
                   <Component id="stud_subPanel10" max="32767" attributes="0"/>
@@ -207,9 +210,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="stud_subName2" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="stud_profName2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="stud_subDesc2" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="219" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -225,9 +227,7 @@
                   <Component id="stud_subName2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="stud_profName2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="stud_subDesc2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="46" max="32767" attributes="0"/>
+                  <EmptySpace pref="74" max="32767" attributes="0"/>
                   <Component id="stud_subEnter2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -243,11 +243,6 @@
         <Component class="javax.swing.JLabel" name="stud_profName2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Professor Name"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="stud_subDesc2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Subject Description"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="stud_subEnter2">
@@ -269,10 +264,9 @@
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="stud_profName" min="-2" max="-2" attributes="0"/>
-                      <Component id="stud_subDesc" min="-2" max="-2" attributes="0"/>
                       <Component id="stud_subName" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="211" max="32767" attributes="0"/>
+                  <EmptySpace pref="229" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -288,8 +282,6 @@
                   <Component id="stud_subName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="stud_profName" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="stud_subDesc" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="stud_subEnter" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -301,11 +293,6 @@
         <Component class="javax.swing.JLabel" name="stud_subName">
           <Properties>
             <Property name="text" type="java.lang.String" value="Subject Name"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="stud_subDesc">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Subject Description"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="stud_profName">
@@ -333,9 +320,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="stud_subName3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="stud_profName3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="stud_subDesc3" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="200" max="32767" attributes="0"/>
+                  <EmptySpace pref="218" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -351,8 +337,6 @@
                   <Component id="stud_subName3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="stud_profName3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="stud_subDesc3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="stud_subEnter3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -369,11 +353,6 @@
         <Component class="javax.swing.JLabel" name="stud_profName3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Professor Name"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="stud_subDesc3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Subject Description"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="stud_subEnter3">
@@ -396,9 +375,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="stud_subName4" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="stud_profName4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="stud_subDesc4" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="240" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -414,9 +392,7 @@
                   <Component id="stud_subName4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="stud_profName4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="stud_subDesc4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="76" max="32767" attributes="0"/>
                   <Component id="stud_subEnter4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -432,11 +408,6 @@
         <Component class="javax.swing.JLabel" name="stud_profName4">
           <Properties>
             <Property name="text" type="java.lang.String" value="Professor Name"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="stud_subDesc4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Subject Description"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="stud_subEnter4">
@@ -459,9 +430,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="stud_subName5" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="stud_profName5" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="stud_subDesc5" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="201" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -476,8 +446,6 @@
                   <Component id="stud_subName5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="stud_profName5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="stud_subDesc5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="stud_subEnter5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -494,11 +462,6 @@
         <Component class="javax.swing.JLabel" name="stud_profName5">
           <Properties>
             <Property name="text" type="java.lang.String" value="Professor Name"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="stud_subDesc5">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Subject Description"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="stud_subEnter5">
@@ -521,9 +484,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="stud_subName6" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="stud_profName6" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="stud_subDesc6" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="200" max="32767" attributes="0"/>
+                  <EmptySpace pref="218" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -538,9 +500,7 @@
                   <Component id="stud_subName6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="stud_profName6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="stud_subDesc6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="stud_subEnter6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -556,11 +516,6 @@
         <Component class="javax.swing.JLabel" name="stud_profName6">
           <Properties>
             <Property name="text" type="java.lang.String" value="Professor Name"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="stud_subDesc6">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Subject Description"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="stud_subEnter6">
@@ -599,9 +554,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="stud_subName7" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="stud_profName7" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="stud_subDesc7" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="222" max="32767" attributes="0"/>
+                  <EmptySpace pref="240" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -617,8 +571,6 @@
                   <Component id="stud_subName7" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="stud_profName7" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="stud_subDesc7" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="stud_subEnter7" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -635,11 +587,6 @@
         <Component class="javax.swing.JLabel" name="stud_profName7">
           <Properties>
             <Property name="text" type="java.lang.String" value="Professor Name"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="stud_subDesc7">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Subject Description"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="stud_subEnter7">
@@ -662,9 +609,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="stud_subName8" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="stud_profName8" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="stud_subDesc8" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="201" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -680,9 +626,7 @@
                   <Component id="stud_subName8" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="stud_profName8" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="stud_subDesc8" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="58" max="32767" attributes="0"/>
+                  <EmptySpace pref="86" max="32767" attributes="0"/>
                   <Component id="stud_subEnter8" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -698,11 +642,6 @@
         <Component class="javax.swing.JLabel" name="stud_profName8">
           <Properties>
             <Property name="text" type="java.lang.String" value="Professor Name"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="stud_subDesc8">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Subject Description"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="stud_subEnter8">
@@ -725,9 +664,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="stud_subName10" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="stud_profName10" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="stud_subDesc10" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="200" max="32767" attributes="0"/>
+                  <EmptySpace pref="218" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -743,8 +681,6 @@
                   <Component id="stud_subName10" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="stud_profName10" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="stud_subDesc10" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="stud_subEnter10" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -761,11 +697,6 @@
         <Component class="javax.swing.JLabel" name="stud_profName10">
           <Properties>
             <Property name="text" type="java.lang.String" value="Professor Name"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="stud_subDesc10">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Subject Description"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="stud_subEnter10">
@@ -788,9 +719,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="stud_subName11" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="stud_profName11" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="stud_subDesc11" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="201" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -806,9 +736,7 @@
                   <Component id="stud_subName11" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="stud_profName11" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="stud_subDesc11" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="58" max="32767" attributes="0"/>
+                  <EmptySpace pref="86" max="32767" attributes="0"/>
                   <Component id="stud_subEnter11" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -824,11 +752,6 @@
         <Component class="javax.swing.JLabel" name="stud_profName11">
           <Properties>
             <Property name="text" type="java.lang.String" value="Professor Name"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="stud_subDesc11">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Subject Description"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="stud_subEnter11">

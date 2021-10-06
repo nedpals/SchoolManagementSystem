@@ -5,10 +5,10 @@
  */
 package schoolmanagementsystem.student_gui;
 import java.util.Iterator;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import schoolmanagementsystem.student_gui.Version;
-import schoolmanagementsystem.student_gui.Settings;
 import schoolmanagementsystem.student_gui.SubView;
 import schoolmanagementsystem.student_gui.NotesView;
 /**
@@ -22,6 +22,7 @@ public class student_win extends javax.swing.JFrame {
      */
     public student_win() {
         initComponents();
+        
         
     }
 
@@ -40,54 +41,44 @@ public class student_win extends javax.swing.JFrame {
         stud_subPanel2 = new javax.swing.JPanel();
         stud_subName2 = new javax.swing.JLabel();
         stud_profName2 = new javax.swing.JLabel();
-        stud_subDesc2 = new javax.swing.JLabel();
         stud_subEnter2 = new javax.swing.JButton();
         stud_subPanel = new javax.swing.JPanel();
         stud_subName = new javax.swing.JLabel();
-        stud_subDesc = new javax.swing.JLabel();
         stud_profName = new javax.swing.JLabel();
         stud_subEnter = new javax.swing.JButton();
         stud_subPanel3 = new javax.swing.JPanel();
         stud_subName3 = new javax.swing.JLabel();
         stud_profName3 = new javax.swing.JLabel();
-        stud_subDesc3 = new javax.swing.JLabel();
         stud_subEnter3 = new javax.swing.JButton();
         stud_subPanel4 = new javax.swing.JPanel();
         stud_subName4 = new javax.swing.JLabel();
         stud_profName4 = new javax.swing.JLabel();
-        stud_subDesc4 = new javax.swing.JLabel();
         stud_subEnter4 = new javax.swing.JButton();
         stud_subPanel5 = new javax.swing.JPanel();
         stud_subName5 = new javax.swing.JLabel();
         stud_profName5 = new javax.swing.JLabel();
-        stud_subDesc5 = new javax.swing.JLabel();
         stud_subEnter5 = new javax.swing.JButton();
         stud_subPanel6 = new javax.swing.JPanel();
         stud_subName6 = new javax.swing.JLabel();
         stud_profName6 = new javax.swing.JLabel();
-        stud_subDesc6 = new javax.swing.JLabel();
         stud_subEnter6 = new javax.swing.JButton();
         stud_fname = new javax.swing.JLabel();
         stud_date = new javax.swing.JLabel();
         stud_subPanel7 = new javax.swing.JPanel();
         stud_subName7 = new javax.swing.JLabel();
         stud_profName7 = new javax.swing.JLabel();
-        stud_subDesc7 = new javax.swing.JLabel();
         stud_subEnter7 = new javax.swing.JButton();
         stud_subPanel8 = new javax.swing.JPanel();
         stud_subName8 = new javax.swing.JLabel();
         stud_profName8 = new javax.swing.JLabel();
-        stud_subDesc8 = new javax.swing.JLabel();
         stud_subEnter8 = new javax.swing.JButton();
         stud_subPanel10 = new javax.swing.JPanel();
         stud_subName10 = new javax.swing.JLabel();
         stud_profName10 = new javax.swing.JLabel();
-        stud_subDesc10 = new javax.swing.JLabel();
         stud_subEnter10 = new javax.swing.JButton();
         stud_subPanel11 = new javax.swing.JPanel();
         stud_subName11 = new javax.swing.JLabel();
         stud_profName11 = new javax.swing.JLabel();
-        stud_subDesc11 = new javax.swing.JLabel();
         stud_subEnter11 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         stud_file_menu = new javax.swing.JMenu();
@@ -114,8 +105,6 @@ public class student_win extends javax.swing.JFrame {
 
         stud_profName2.setText("Professor Name");
 
-        stud_subDesc2.setText("Subject Description");
-
         stud_subEnter2.setText("Enter");
         stud_subEnter2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,9 +120,8 @@ public class student_win extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(stud_subPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stud_subName2)
-                    .addComponent(stud_profName2)
-                    .addComponent(stud_subDesc2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(stud_profName2))
+                .addContainerGap(219, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stud_subPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter2)
@@ -146,16 +134,12 @@ public class student_win extends javax.swing.JFrame {
                 .addComponent(stud_subName2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stud_profName2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stud_subDesc2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(stud_subEnter2)
                 .addContainerGap())
         );
 
         stud_subName.setText("Subject Name");
-
-        stud_subDesc.setText("Subject Description");
 
         stud_profName.setText("Professor Name");
 
@@ -174,9 +158,8 @@ public class student_win extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(stud_subPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stud_profName)
-                    .addComponent(stud_subDesc)
                     .addComponent(stud_subName))
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(229, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stud_subPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter)
@@ -189,8 +172,6 @@ public class student_win extends javax.swing.JFrame {
                 .addComponent(stud_subName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stud_profName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stud_subDesc)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter)
                 .addContainerGap())
@@ -199,8 +180,6 @@ public class student_win extends javax.swing.JFrame {
         stud_subName3.setText("Subject Name");
 
         stud_profName3.setText("Professor Name");
-
-        stud_subDesc3.setText("Subject Description");
 
         stud_subEnter3.setText("Enter");
         stud_subEnter3.addActionListener(new java.awt.event.ActionListener() {
@@ -217,9 +196,8 @@ public class student_win extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(stud_subPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stud_subName3)
-                    .addComponent(stud_profName3)
-                    .addComponent(stud_subDesc3))
-                .addContainerGap(200, Short.MAX_VALUE))
+                    .addComponent(stud_profName3))
+                .addContainerGap(218, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stud_subPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter3)
@@ -232,8 +210,6 @@ public class student_win extends javax.swing.JFrame {
                 .addComponent(stud_subName3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stud_profName3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stud_subDesc3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter3)
                 .addContainerGap())
@@ -242,8 +218,6 @@ public class student_win extends javax.swing.JFrame {
         stud_subName4.setText("Subject Name");
 
         stud_profName4.setText("Professor Name");
-
-        stud_subDesc4.setText("Subject Description");
 
         stud_subEnter4.setText("Enter");
         stud_subEnter4.addActionListener(new java.awt.event.ActionListener() {
@@ -260,9 +234,8 @@ public class student_win extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(stud_subPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stud_subName4)
-                    .addComponent(stud_profName4)
-                    .addComponent(stud_subDesc4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(stud_profName4))
+                .addContainerGap(240, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stud_subPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter4)
@@ -275,9 +248,7 @@ public class student_win extends javax.swing.JFrame {
                 .addComponent(stud_subName4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stud_profName4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stud_subDesc4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(stud_subEnter4)
                 .addContainerGap())
         );
@@ -285,8 +256,6 @@ public class student_win extends javax.swing.JFrame {
         stud_subName5.setText("Subject Name");
 
         stud_profName5.setText("Professor Name");
-
-        stud_subDesc5.setText("Subject Description");
 
         stud_subEnter5.setText("Enter");
         stud_subEnter5.addActionListener(new java.awt.event.ActionListener() {
@@ -303,9 +272,8 @@ public class student_win extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(stud_subPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stud_subName5)
-                    .addComponent(stud_profName5)
-                    .addComponent(stud_subDesc5))
-                .addContainerGap(201, Short.MAX_VALUE))
+                    .addComponent(stud_profName5))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stud_subPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter5)
@@ -317,8 +285,6 @@ public class student_win extends javax.swing.JFrame {
                 .addComponent(stud_subName5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stud_profName5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stud_subDesc5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter5)
                 .addContainerGap())
@@ -327,8 +293,6 @@ public class student_win extends javax.swing.JFrame {
         stud_subName6.setText("Subject Name");
 
         stud_profName6.setText("Professor Name");
-
-        stud_subDesc6.setText("Subject Description");
 
         stud_subEnter6.setText("Enter");
         stud_subEnter6.addActionListener(new java.awt.event.ActionListener() {
@@ -345,9 +309,8 @@ public class student_win extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(stud_subPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stud_subName6)
-                    .addComponent(stud_profName6)
-                    .addComponent(stud_subDesc6))
-                .addContainerGap(200, Short.MAX_VALUE))
+                    .addComponent(stud_profName6))
+                .addContainerGap(218, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stud_subPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter6)
@@ -359,9 +322,7 @@ public class student_win extends javax.swing.JFrame {
                 .addComponent(stud_subName6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stud_profName6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stud_subDesc6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter6)
                 .addContainerGap())
         );
@@ -375,8 +336,6 @@ public class student_win extends javax.swing.JFrame {
         stud_subName7.setText("Subject Name");
 
         stud_profName7.setText("Professor Name");
-
-        stud_subDesc7.setText("Subject Description");
 
         stud_subEnter7.setText("Enter");
         stud_subEnter7.addActionListener(new java.awt.event.ActionListener() {
@@ -393,9 +352,8 @@ public class student_win extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(stud_subPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stud_subName7)
-                    .addComponent(stud_profName7)
-                    .addComponent(stud_subDesc7))
-                .addContainerGap(222, Short.MAX_VALUE))
+                    .addComponent(stud_profName7))
+                .addContainerGap(240, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stud_subPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter7)
@@ -408,8 +366,6 @@ public class student_win extends javax.swing.JFrame {
                 .addComponent(stud_subName7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stud_profName7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stud_subDesc7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter7)
                 .addContainerGap())
@@ -418,8 +374,6 @@ public class student_win extends javax.swing.JFrame {
         stud_subName8.setText("Subject Name");
 
         stud_profName8.setText("Professor Name");
-
-        stud_subDesc8.setText("Subject Description");
 
         stud_subEnter8.setText("Enter");
         stud_subEnter8.addActionListener(new java.awt.event.ActionListener() {
@@ -436,9 +390,8 @@ public class student_win extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(stud_subPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stud_subName8)
-                    .addComponent(stud_profName8)
-                    .addComponent(stud_subDesc8))
-                .addContainerGap(201, Short.MAX_VALUE))
+                    .addComponent(stud_profName8))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stud_subPanel8Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter8)
@@ -451,9 +404,7 @@ public class student_win extends javax.swing.JFrame {
                 .addComponent(stud_subName8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stud_profName8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stud_subDesc8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(stud_subEnter8)
                 .addContainerGap())
         );
@@ -461,8 +412,6 @@ public class student_win extends javax.swing.JFrame {
         stud_subName10.setText("Subject Name");
 
         stud_profName10.setText("Professor Name");
-
-        stud_subDesc10.setText("Subject Description");
 
         stud_subEnter10.setText("Enter");
         stud_subEnter10.addActionListener(new java.awt.event.ActionListener() {
@@ -479,9 +428,8 @@ public class student_win extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(stud_subPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stud_subName10)
-                    .addComponent(stud_profName10)
-                    .addComponent(stud_subDesc10))
-                .addContainerGap(200, Short.MAX_VALUE))
+                    .addComponent(stud_profName10))
+                .addContainerGap(218, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stud_subPanel10Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter10)
@@ -494,8 +442,6 @@ public class student_win extends javax.swing.JFrame {
                 .addComponent(stud_subName10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stud_profName10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stud_subDesc10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter10)
                 .addContainerGap())
@@ -504,8 +450,6 @@ public class student_win extends javax.swing.JFrame {
         stud_subName11.setText("Subject Name");
 
         stud_profName11.setText("Professor Name");
-
-        stud_subDesc11.setText("Subject Description");
 
         stud_subEnter11.setText("Enter");
         stud_subEnter11.addActionListener(new java.awt.event.ActionListener() {
@@ -522,9 +466,8 @@ public class student_win extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(stud_subPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stud_subName11)
-                    .addComponent(stud_profName11)
-                    .addComponent(stud_subDesc11))
-                .addContainerGap(201, Short.MAX_VALUE))
+                    .addComponent(stud_profName11))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stud_subPanel11Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(stud_subEnter11)
@@ -537,9 +480,7 @@ public class student_win extends javax.swing.JFrame {
                 .addComponent(stud_subName11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stud_profName11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(stud_subDesc11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(stud_subEnter11)
                 .addContainerGap())
         );
@@ -583,6 +524,11 @@ public class student_win extends javax.swing.JFrame {
         stud_account_menu.add(stud_addSubjMenu);
 
         stud_signoutMenu.setText("Sign Out");
+        stud_signoutMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stud_signoutMenuActionPerformed(evt);
+            }
+        });
         stud_account_menu.add(stud_signoutMenu);
 
         jMenuBar1.add(stud_account_menu);
@@ -616,13 +562,13 @@ public class student_win extends javax.swing.JFrame {
                     .addComponent(stud_subPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(stud_subPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(stud_subPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(stud_subPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(stud_subPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(stud_subPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(stud_subPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(29, 29, 29)
+                    .addComponent(stud_subPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(stud_subPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(stud_subPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -667,14 +613,17 @@ public class student_win extends javax.swing.JFrame {
 
     private void stud_versMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_versMenuActionPerformed
         // TODO add your handling code here:
-        Version vers = new Version();
-         vers.setLocationRelativeTo(this);
-        vers.setVisible(true);
-         this.dispose();
+         JOptionPane.showMessageDialog(null, "School Management System Version 1.0");
+            
+         
+         
     }//GEN-LAST:event_stud_versMenuActionPerformed
 
     private void stud_subEnter2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_subEnter2ActionPerformed
         // TODO add your handling code here:
+        SubjectView subview = new SubjectView();
+         subview.setLocationRelativeTo(this);
+        subview.setVisible(true);
     }//GEN-LAST:event_stud_subEnter2ActionPerformed
 
     private void stud_subEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_subEnterActionPerformed
@@ -682,39 +631,63 @@ public class student_win extends javax.swing.JFrame {
          SubjectView subview = new SubjectView();
          subview.setLocationRelativeTo(this);
         subview.setVisible(true);
-         this.dispose();
+         
     }//GEN-LAST:event_stud_subEnterActionPerformed
 
     private void stud_subEnter3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_subEnter3ActionPerformed
         // TODO add your handling code here:
+        SubjectView subview = new SubjectView();
+         subview.setLocationRelativeTo(this);
+        subview.setVisible(true);
     }//GEN-LAST:event_stud_subEnter3ActionPerformed
 
     private void stud_subEnter4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_subEnter4ActionPerformed
         // TODO add your handling code here:
+        SubjectView subview = new SubjectView();
+         subview.setLocationRelativeTo(this);
+        subview.setVisible(true);
     }//GEN-LAST:event_stud_subEnter4ActionPerformed
 
     private void stud_subEnter5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_subEnter5ActionPerformed
         // TODO add your handling code here:
+        SubjectView subview = new SubjectView();
+         subview.setLocationRelativeTo(this);
+        subview.setVisible(true);
     }//GEN-LAST:event_stud_subEnter5ActionPerformed
 
     private void stud_subEnter6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_subEnter6ActionPerformed
         // TODO add your handling code here:
+        SubjectView subview = new SubjectView();
+         subview.setLocationRelativeTo(this);
+        subview.setVisible(true);
     }//GEN-LAST:event_stud_subEnter6ActionPerformed
 
     private void stud_subEnter7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_subEnter7ActionPerformed
         // TODO add your handling code here:
+        SubjectView subview = new SubjectView();
+         subview.setLocationRelativeTo(this);
+        subview.setVisible(true);
     }//GEN-LAST:event_stud_subEnter7ActionPerformed
 
     private void stud_subEnter8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_subEnter8ActionPerformed
         // TODO add your handling code here:
+        SubjectView subview = new SubjectView();
+         subview.setLocationRelativeTo(this);
+        subview.setVisible(true);
     }//GEN-LAST:event_stud_subEnter8ActionPerformed
 
     private void stud_subEnter10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_subEnter10ActionPerformed
         // TODO add your handling code here:
+        SubjectView subview = new SubjectView();
+         subview.setLocationRelativeTo(this);
+        subview.setVisible(true);
     }//GEN-LAST:event_stud_subEnter10ActionPerformed
 
     private void stud_subEnter11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_subEnter11ActionPerformed
         // TODO add your handling code here:
+        SubjectView subview = new SubjectView();
+         subview.setLocationRelativeTo(this);
+        subview.setVisible(true);
     }//GEN-LAST:event_stud_subEnter11ActionPerformed
 
     private void stud_addSubjMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_addSubjMenuActionPerformed
@@ -724,15 +697,24 @@ public class student_win extends javax.swing.JFrame {
 
     private void stud_exitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_exitMenuActionPerformed
         // TODO add your handling code here:
+        dispose();
         
     }//GEN-LAST:event_stud_exitMenuActionPerformed
 
     private void stud_settMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_settMenuActionPerformed
         // TODO add your handling code here:
-        Settings sett = new Settings();
-        sett.setLocationRelativeTo(this);
-        sett.setVisible(true);
+        JOptionPane.showMessageDialog(null, "Permission not allowed, please contact the administrator");
     }//GEN-LAST:event_stud_settMenuActionPerformed
+
+    private void stud_signoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_signoutMenuActionPerformed
+        // TODO add your handling code here:
+        try{
+            JOptionPane.showMessageDialog(null, "Successfully Logged Out!");
+            dispose();
+       } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+       }
+    }//GEN-LAST:event_stud_signoutMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -761,6 +743,7 @@ public class student_win extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -790,16 +773,6 @@ public class student_win extends javax.swing.JFrame {
     private javax.swing.JLabel stud_profName8;
     private javax.swing.JMenuItem stud_settMenu;
     private javax.swing.JMenuItem stud_signoutMenu;
-    private javax.swing.JLabel stud_subDesc;
-    private javax.swing.JLabel stud_subDesc10;
-    private javax.swing.JLabel stud_subDesc11;
-    private javax.swing.JLabel stud_subDesc2;
-    private javax.swing.JLabel stud_subDesc3;
-    private javax.swing.JLabel stud_subDesc4;
-    private javax.swing.JLabel stud_subDesc5;
-    private javax.swing.JLabel stud_subDesc6;
-    private javax.swing.JLabel stud_subDesc7;
-    private javax.swing.JLabel stud_subDesc8;
     private javax.swing.JButton stud_subEnter;
     private javax.swing.JButton stud_subEnter10;
     private javax.swing.JButton stud_subEnter11;

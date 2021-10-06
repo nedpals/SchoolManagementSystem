@@ -5,6 +5,12 @@
  */
 package schoolmanagementsystem.professor_gui;
 
+import java.io.FileReader;
+import javax.swing.JOptionPane;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 /**
  *
  * @author User
@@ -16,6 +22,7 @@ public class addStudent extends javax.swing.JFrame {
      */
     public addStudent() {
         initComponents();
+        
     }
 
     /**
@@ -29,9 +36,9 @@ public class addStudent extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        searchTxt = new javax.swing.JTextField();
+        closeButton = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,16 +48,21 @@ public class addStudent extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel2.setText("Student Name");
 
-        jButton1.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jButton1.setText("Close");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        closeButton.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        closeButton.setText("Close");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                closeButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
-        jButton2.setText("Search");
+        searchButton.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,13 +72,13 @@ public class addStudent extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(searchButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(closeButton))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2)
                         .addComponent(jLabel1)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -77,22 +89,49 @@ public class addStudent extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(closeButton)
+                    .addComponent(searchButton))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
        subjStudents students = new subjStudents();
        students.setVisible(true);
        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+       String dbpath = "src/schoolmanagementsystem/database_tables/students.json";
+        JSONParser parser = new JSONParser();
+        FileReader reader;
+        try {
+            reader = new FileReader(dbpath);
+            JSONArray users = (JSONArray) parser.parse(reader);
+            reader.close();
+
+            for (int i = 0; i < users.size(); i++) {
+                JSONObject user = (JSONObject) users.get(i);
+                String getName = (String) user.get("name");
+                String studName = searchTxt.getText();
+                if (studName.equals(getName)) {
+                    searchResult frame = new searchResult();
+                    frame.setVisible(true);
+                    this.dispose();
+
+                }else{
+                    JOptionPane.showMessageDialog(null,"Nothing Matched your Search");
+                }
+            }
+        }catch(Exception e){
+             JOptionPane.showMessageDialog(null,"Invalid Account");
+        }
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,10 +169,10 @@ public class addStudent extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton closeButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JTextField searchTxt;
     // End of variables declaration//GEN-END:variables
 }
