@@ -16,7 +16,7 @@ import org.json.simple.JSONArray;
 public class Admin extends User {
     public int id;
     
-    Admin(int id, String username, String password) {
+    public Admin(int id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
