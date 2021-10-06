@@ -1,5 +1,5 @@
 
-package schoolmanagementsystem.admin;
+package schoolmanagementsystem.admin_gui;
 
 import java.awt.event.ActionListener;
 import java.io.IOException;

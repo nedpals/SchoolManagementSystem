@@ -1,5 +1,5 @@
 
-package schoolmanagementsystem.admin;
+package schoolmanagementsystem.admin_gui;
 
 import javax.swing.JOptionPane;
 import schoolmanagementsystem.Admin;
@@ -103,7 +103,6 @@ public class AdminContentWindow extends javax.swing.JFrame {
         jButton2.setText("DELETE");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("First Name, Last Name,  Section");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -143,7 +142,6 @@ public class AdminContentWindow extends javax.swing.JFrame {
         jButton4.setText("DELETE");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("First Name, Last Name,  Section");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -183,7 +181,6 @@ public class AdminContentWindow extends javax.swing.JFrame {
         jButton6.setText("DELETE");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("First Name, Last Name,  Section");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -223,7 +220,6 @@ public class AdminContentWindow extends javax.swing.JFrame {
         jButton8.setText("DELETE");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("First Name, Last Name,  Section");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -263,7 +259,6 @@ public class AdminContentWindow extends javax.swing.JFrame {
         jButton10.setText("DELETE");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("First Name, Last Name,  Section");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -308,7 +303,6 @@ public class AdminContentWindow extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("First Name, Last Name,  Section");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);

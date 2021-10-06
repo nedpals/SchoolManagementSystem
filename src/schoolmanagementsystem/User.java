@@ -13,8 +13,8 @@ public abstract class User extends DBEntity {
     public String username;
     protected String password;
     
-    /*public abstract void login(String username, String password) throws Exception;*/
-    public abstract void logout();
+//    public abstract void login(String username, String password) throws Exception;
+//    public abstract void logout();
     public void setPassword(String newPassword) {
         this.password = newPassword;
     };

@@ -6,7 +6,6 @@
 package schoolmanagementsystem;
 
 import java.util.Iterator;
-import javax.swing.JOptionPane;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
@@ -71,7 +70,6 @@ public class Admin extends User {
             adminTable.update(this.arrayIndex, this);
         }
     }
-
     
     public static Admin getByUsername(String username) throws Exception {
         Iterator sessionsIt = Database.get("admins").all().iterator();
@@ -98,25 +96,10 @@ public class Admin extends User {
              return foundAdmin;
          } else {
              throw new Exception("Password inputted is incorrect");
-                     
          }
     }
-    
-    @Override
+
     public void logout() {
        this.logout();
     }
-    /*    
-    @Override
-    public void login(String username, String password) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void logout() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
->>>>>>> 5896a80fbb679303fe4a5663fef61b8f68e8dfb2
-    }
-*/
  }
-
