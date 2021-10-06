@@ -422,8 +422,8 @@ public class AdminContentWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteAdminActionPerformed
 
     private void addAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAdminActionPerformed
-        new addAdminFrame().setVisible(true);
-        return;
+       addAdminFrame frame = new addAdminFrame();
+       frame.setVisible(true);
     }//GEN-LAST:event_addAdminActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
