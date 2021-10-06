@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package schoolmanagementsystem;
+package schoolmanagementsystem.professor_gui;
 
 import javax.swing.JOptionPane;
+import schoolmanagementsystem.Database;
+import schoolmanagementsystem.Professor;
 
 /**
  *
