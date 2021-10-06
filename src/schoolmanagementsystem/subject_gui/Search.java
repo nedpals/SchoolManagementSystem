@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package schoolmanagementsystem.Subject_Class;
+package schoolmanagementsystem.subject_gui;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,8 +16,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import schoolmanagementsystem.Database;
 import schoolmanagementsystem.Subject;
-import schoolmanagementsystem.Subject_Class.SubjectMain;
-import static schoolmanagementsystem.Subject_Class.SubjectMain.subjectPath;
+import schoolmanagementsystem.subject_gui.SubjectMain;
+import static schoolmanagementsystem.subject_gui.SubjectMain.subjectPath;
 /**
  *
  * @author Parcasio
