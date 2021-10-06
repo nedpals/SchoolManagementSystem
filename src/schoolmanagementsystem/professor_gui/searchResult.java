@@ -30,7 +30,7 @@ public class searchResult extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        resultTable = new javax.swing.JTable();
         addButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -38,7 +38,7 @@ public class searchResult extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         jLabel1.setText("Search Results");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        resultTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -49,7 +49,7 @@ public class searchResult extends javax.swing.JFrame {
                 "Student Name", "Section"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(resultTable);
 
         addButton.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         addButton.setText("Add");
@@ -142,6 +142,6 @@ public class searchResult extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable resultTable;
     // End of variables declaration//GEN-END:variables
 }

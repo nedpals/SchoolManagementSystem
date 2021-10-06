@@ -29,12 +29,12 @@ public class addSubject extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        subjectName = new javax.swing.JTextField();
+        subjectNameTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        subjUnitTxt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        subjectDesc = new javax.swing.JTextArea();
+        subjectDescTxt = new javax.swing.JTextArea();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
@@ -46,9 +46,9 @@ public class addSubject extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel2.setText("Name");
 
-        subjectName.addActionListener(new java.awt.event.ActionListener() {
+        subjectNameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subjectNameActionPerformed(evt);
+                subjectNameTxtActionPerformed(evt);
             }
         });
 
@@ -58,9 +58,9 @@ public class addSubject extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel4.setText("Description");
 
-        subjectDesc.setColumns(20);
-        subjectDesc.setRows(5);
-        jScrollPane1.setViewportView(subjectDesc);
+        subjectDescTxt.setColumns(20);
+        subjectDescTxt.setRows(5);
+        jScrollPane1.setViewportView(subjectDescTxt);
 
         saveButton.setFont(new java.awt.Font("SansSerif", 0, 15)); // NOI18N
         saveButton.setText("Save");
@@ -91,8 +91,8 @@ public class addSubject extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addComponent(jLabel3)
                                 .addComponent(jLabel2)
-                                .addComponent(subjectName)
-                                .addComponent(jTextField2)
+                                .addComponent(subjectNameTxt)
+                                .addComponent(subjUnitTxt)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
@@ -110,11 +110,11 @@ public class addSubject extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(subjectName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(subjectNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(subjUnitTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -129,9 +129,9 @@ public class addSubject extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void subjectNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjectNameActionPerformed
+    private void subjectNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjectNameTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_subjectNameActionPerformed
+    }//GEN-LAST:event_subjectNameTxtActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         dashboard dash = new dashboard();
@@ -185,9 +185,9 @@ public class addSubject extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton saveButton;
-    private javax.swing.JTextArea subjectDesc;
-    private javax.swing.JTextField subjectName;
+    private javax.swing.JTextField subjUnitTxt;
+    private javax.swing.JTextArea subjectDescTxt;
+    private javax.swing.JTextField subjectNameTxt;
     // End of variables declaration//GEN-END:variables
 }
