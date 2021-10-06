@@ -5,6 +5,8 @@
  */
 package schoolmanagementsystem.professor_gui;
 
+import schoolmanagementsystem.common_gui.Login;
+
 /**
  *
  * @author User
@@ -198,7 +200,7 @@ public class dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        login loginFrame = new login();
+        Login loginFrame = new Login();
         loginFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed

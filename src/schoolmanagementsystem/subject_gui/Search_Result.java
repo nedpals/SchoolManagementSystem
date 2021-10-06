@@ -18,9 +18,10 @@ import schoolmanagementsystem.Subject;
 public class Search_Result extends javax.swing.JFrame {
 
      
-     private Subject[] subjects;
+     private Subject[] subjects = new Subject[1];
      private DefaultTableModel resultTableModel;
-     Search_Result(Subject[] subjects) {
+     public Search_Result(Subject[] subjects) {
+         this.initComponents();
          this.subjects = subjects;
          this.resultTableModel = (DefaultTableModel) resultTable.getModel();
      }
@@ -29,10 +30,11 @@ public class Search_Result extends javax.swing.JFrame {
 
         for (int i = 0; i < subjects.length; i++) {
             Subject sub = subjects[i];
+            System.out.println(sub.name);
 	  //Professor prof = sub.getProfessor();
 
             Object[] fields = {
-                sub.id,
+              sub.id,
 	      sub.name,
 	      //prof.name
             };
@@ -46,6 +48,7 @@ public class Search_Result extends javax.swing.JFrame {
      */
     public Search_Result() {
         initComponents();
+        this.resultTableModel = (DefaultTableModel) resultTable.getModel();
     }
 
     /**

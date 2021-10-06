@@ -4,20 +4,11 @@
  * and open the template in the editor.
  */
 package schoolmanagementsystem.subject_gui;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import schoolmanagementsystem.Database;
 import schoolmanagementsystem.Subject;
-import schoolmanagementsystem.subject_gui.SubjectMain;
-import static schoolmanagementsystem.subject_gui.SubjectMain.subjectPath;
 /**
  *
  * @author Parcasio
@@ -85,6 +76,7 @@ public class Search extends javax.swing.JFrame {
       
       try{
          Subject[] results = Subject.search(search); 
+         System.out.println(results);
          Search_Result frame = new Search_Result(results);
          frame.setVisible(true);
          frame.loadSubjectsToTable();
@@ -92,6 +84,7 @@ public class Search extends javax.swing.JFrame {
       }
       catch(Exception e){
           JOptionPane.showMessageDialog(null, e.getMessage());
+          e.printStackTrace();
           searchField.setText("");
       }
     }//GEN-LAST:event_searchButtonActionPerformed

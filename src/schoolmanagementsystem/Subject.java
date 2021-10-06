@@ -46,18 +46,25 @@ public class Subject extends DBEntity{
                 }
                 
                 foundSubjects[i] = Subject.fromJSON(data);
+                System.out.printf("i is %d", i);
                 i++;
                 continue;
             }
-              if (data.containsKey("name")) {
+            
+            if (data.containsKey("name")) {
                 String subjectId = (String)data.get("name");
                 if(!subjectId.equals(idOrName)){
                     continue;                  
                 }
                 foundSubjects[i] = Subject.fromJSON(data);
+                System.out.printf("i is %d", i);
                 i++;
                 continue;           
             }
+        }
+        
+        if (i == 0) {
+            throw new Exception("No results found.");
         }
         return foundSubjects;
 }
