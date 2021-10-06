@@ -21,6 +21,7 @@ public class Search_Result extends javax.swing.JFrame {
      private Subject[] subjects;
      private DefaultTableModel resultTableModel;
      Search_Result(Subject[] subjects) {
+         this.initComponents();
          this.subjects = subjects;
          this.resultTableModel = (DefaultTableModel) resultTable.getModel();
      }

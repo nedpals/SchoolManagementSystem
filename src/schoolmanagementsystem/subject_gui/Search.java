@@ -23,12 +23,14 @@ import static schoolmanagementsystem.subject_gui.SubjectMain.subjectPath;
  *
  * @author Parcasio
  */
+
 public class Search extends javax.swing.JFrame {
     /**
      * Creates new form Search
      */
     public Search() {
         initComponents();
+      
     }
 
     /**
@@ -80,32 +82,20 @@ public class Search extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-
-    String dbpath = "src/schoolmanagementsystem/database_tables/subjects.json";
-        JSONParser parser = new JSONParser();
-        FileReader reader;
-        try {
-            reader = new FileReader(dbpath);
-            JSONArray users = (JSONArray) parser.parse(reader);
-            reader.close();
-
-            for (int i = 0; i < users.size(); i++) {
-                JSONObject user = (JSONObject) users.get(i);
-                String getName = (String) user.get("name");
-                String getID = (String) user.get("id");
-                String uname = searchField.getText();
-                if (uname.equals(getName)||uname.equals(getID)) {
-                    Search_Result frame = new Search_Result();
-                    frame.setVisible(true);
-                    this.dispose();
-
-                }else{
-                    JOptionPane.showMessageDialog(null,"Nothing Matched your Search");
-                }
-            }
-        }catch(Exception e){
-             JOptionPane.showMessageDialog(null,"Invalid Account");
-        }
+   String search;
+      search = searchField.getText();
+      
+      try{
+         Subject[] results = Subject.search(search); 
+         Search_Result frame = new Search_Result(results);
+         frame.setVisible(true);
+         frame.loadSubjectsToTable();
+         this.dispose();
+      }
+      catch(Exception e){
+          JOptionPane.showMessageDialog(null, e.getMessage());
+          System.out.println(e.getMessage());
+      }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     /**
