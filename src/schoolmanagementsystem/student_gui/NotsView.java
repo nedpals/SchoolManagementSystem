@@ -5,6 +5,8 @@
  */
 package schoolmanagementsystem.student_gui;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author japz3
@@ -16,6 +18,8 @@ public class NotsView extends javax.swing.JFrame {
      */
     public NotsView() {
         initComponents();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -30,7 +34,7 @@ public class NotsView extends javax.swing.JFrame {
         stud_notesViewNameLabel = new javax.swing.JLabel();
         stud_notesViewSubjLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        stud_subSessTextArea = new javax.swing.JTextArea();
+        stud_notsSessLabelArea = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,9 +43,7 @@ public class NotsView extends javax.swing.JFrame {
 
         stud_notesViewSubjLabel.setText("Subject Name");
 
-        stud_subSessTextArea.setColumns(20);
-        stud_subSessTextArea.setRows(5);
-        jScrollPane1.setViewportView(stud_subSessTextArea);
+        jScrollPane1.setViewportView(stud_notsSessLabelArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,6 +111,6 @@ public class NotsView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel stud_notesViewNameLabel;
     private javax.swing.JLabel stud_notesViewSubjLabel;
-    private javax.swing.JTextArea stud_subSessTextArea;
+    private javax.swing.JLabel stud_notsSessLabelArea;
     // End of variables declaration//GEN-END:variables
 }

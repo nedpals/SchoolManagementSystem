@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package schoolmanagementsystem.student_gui;
+import javax.swing.JFrame;
 import schoolmanagementsystem.student_gui.SubjectView;
 import schoolmanagementsystem.student_gui.NotsView;
 
@@ -18,6 +19,8 @@ public class NotesView extends javax.swing.JFrame {
      */
     public NotesView() {
         initComponents();
+        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -33,7 +36,6 @@ public class NotesView extends javax.swing.JFrame {
         stud_noteViewProfLabel = new javax.swing.JLabel();
         stud_noteViewSessButton = new javax.swing.JButton();
         stud_noteViewNoteButton = new javax.swing.JButton();
-        nScrollPane1 = new javax.swing.JScrollPane();
         nTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,16 +62,12 @@ public class NotesView extends javax.swing.JFrame {
 
         nTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "", ""
             }
         ));
-        nScrollPane1.setViewportView(nTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,17 +76,18 @@ public class NotesView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+                    .addComponent(stud_noteViewSubLabel)
+                    .addComponent(stud_noteViewProfLabel)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(stud_noteViewSubLabel)
-                            .addComponent(stud_noteViewProfLabel)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(stud_noteViewSessButton)
-                                .addGap(31, 31, 31)
-                                .addComponent(stud_noteViewNoteButton)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(stud_noteViewSessButton)
+                        .addGap(31, 31, 31)
+                        .addComponent(stud_noteViewNoteButton)))
+                .addContainerGap(476, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(7, Short.MAX_VALUE)
+                    .addComponent(nTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(7, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,9 +100,12 @@ public class NotesView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(stud_noteViewSessButton)
                     .addComponent(stud_noteViewNoteButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(538, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(125, Short.MAX_VALUE)
+                    .addComponent(nTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         pack();
@@ -119,10 +121,7 @@ public class NotesView extends javax.swing.JFrame {
 
     private void stud_noteViewNoteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stud_noteViewNoteButtonActionPerformed
         // TODO add your handling code here:
-        NotsView notsv = new NotsView();
-        notsv.setLocationRelativeTo(this);
-        notsv.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_stud_noteViewNoteButtonActionPerformed
 
     /**
@@ -161,7 +160,6 @@ public class NotesView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane nScrollPane1;
     private javax.swing.JTable nTable1;
     private javax.swing.JButton stud_noteViewNoteButton;
     private javax.swing.JLabel stud_noteViewProfLabel;
