@@ -1,5 +1,5 @@
 
-package schoolmanagementsystem.admin;
+package schoolmanagementsystem.admin_gui;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
