@@ -181,6 +181,29 @@ public class Professor extends User {
         
     }
     
+    public void dropStudent(Subject subj, Student stud) throws Exception{
     
+        String[] newSubjectIds = new String[this.subjectIds.length-1];
+       for(int i = 0; i<this.subjectIds.length; i++){
+           if(this.subjectIds[i]==subject.id){
+               continue;
+           }
+           newSubjectIds[i] = this.subjectIds[i];
+       }
+       this.subjectIds = newSubjectIds;
+       this.save();
+    
+       int[] newstudentIds = new int[subject.studentIds.length-1];
+       for(int i = 0; i<subject.studentIds.length; i++){
+           if(subject.studentIds[i]==this.id){
+               continue;
+           }
+           newstudentIds[i] = subject.studentIds[i];
+       }
+       subject.studentIds = newstudentIds;
+       subject.save();
 }
+}
+    
+
 
