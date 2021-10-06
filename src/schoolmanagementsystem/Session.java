@@ -16,13 +16,13 @@ import org.json.simple.JSONObject;
 public class Session extends DBEntity {
     public int id;
     public Date2 heldAt;
-    public int subjectId;
+    public String subjectId;
     public String title;
     public String description;
     public int[] attendanceIds;
     private int arrayIndex = -1;
     
-    Session(int id, Date2 heldAt, int subjectId, String title, String description, int[] attendanceIds) {
+    Session(int id, Date2 heldAt, String subjectId, String title, String description, int[] attendanceIds) {
         this.id = id;
         this.heldAt = heldAt;
         this.subjectId = subjectId;
@@ -51,7 +51,7 @@ public class Session extends DBEntity {
     public static Session fromJSON(JSONObject obj, int arrayIndex) throws Exception {
         int id = (int) (long) obj.get("id");
         Date2 heldAt = Date2.fromJSON((String) obj.get("heldAt"));
-        int subjectID = (int) (long) obj.get("subjectId");
+        String subjectID = (String) obj.get("subjectId");
         String title = (String) obj.get("title");
         String description = (String) obj.get("description");
         JSONArray rawAttendanceIds = (JSONArray) obj.get("attendanceIds");
@@ -66,8 +66,8 @@ public class Session extends DBEntity {
         return sess;
     }
     
-    public void getSubject() throws Exception {
-        throw new Exception("Not implemented yet!");
+    public Subject getSubject() throws Exception {
+        return Subject.getById(subjectId);
     }
     
     @Override
