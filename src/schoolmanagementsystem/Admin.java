@@ -5,6 +5,7 @@
  */
 package schoolmanagementsystem;
 
+import java.util.Iterator;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
@@ -97,8 +98,7 @@ public class Admin extends User {
              throw new Exception("Password inputted is incorrect");
          }
     }
-    
-    @Override
+
     public void logout() {
        this.logout();
     }
