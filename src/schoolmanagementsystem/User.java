@@ -5,6 +5,9 @@
  */
 package schoolmanagementsystem;
 
+import database.Database;
+import database.DBEntity;
+
 /**
  *
  * @author nedpals
@@ -13,9 +16,17 @@ public abstract class User extends DBEntity {
     public String username;
     protected String password;
     
+    public Object getId() {
+        return this.id;
+    }
+    
 //    public abstract void login(String username, String password) throws Exception;
 //    public abstract void logout();
     public void setPassword(String newPassword) {
         this.password = newPassword;
-    };
+    }
+    
+    public String getPassword() {
+        return this.password;
+    }
 }

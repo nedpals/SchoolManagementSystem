@@ -5,7 +5,11 @@
  */
 package schoolmanagementsystem;
 
+import database.Database;
+import database.Table;
+import database.DBEntity;
 import java.util.Iterator;
+import java.util.Date;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -14,15 +18,22 @@ import org.json.simple.JSONObject;
  * @author nedpals
  */
 public class Session extends DBEntity {
-    public int id;
+    
     public Date2 heldAt;
     public String subjectId;
     public String title;
     public String description;
-    public int[] attendanceIds;
-    private int arrayIndex = -1;
+    public long[] attendanceIds;
     
-    Session(int id, Date2 heldAt, String subjectId, String title, String description, int[] attendanceIds) {
+    public Session(String subjectId, String title, String description) {
+        this.heldAt = new Date2();
+        this.subjectId = subjectId;
+        this.title = title;
+        this.description = description;
+        this.attendanceIds = new long[0];
+    }
+    
+    Session(long id, Date2 heldAt, String subjectId, String title, String description, long[] attendanceIds) {
         this.id = id;
         this.heldAt = heldAt;
         this.subjectId = subjectId;
@@ -31,12 +42,12 @@ public class Session extends DBEntity {
         this.attendanceIds = attendanceIds;
     }
     
-    public static Session getById(int id) throws Exception {
+    public static Session getById(long id) throws Exception {
         Iterator sessionsIt = Database.get("sessions").all().iterator();
         
         while (sessionsIt.hasNext()) {
             JSONObject data = (JSONObject) sessionsIt.next();
-            if (data.containsKey("id") && (int) data.get("id") == id) {
+            if (data.containsKey("id") && ((long) data.get("id")) == id) {
                 return Session.fromJSON(data);
             }
         }
@@ -45,24 +56,19 @@ public class Session extends DBEntity {
     }
     
     public static Session fromJSON(JSONObject obj) throws Exception {
-        return Session.fromJSON(obj, -1);
-    }
-    
-    public static Session fromJSON(JSONObject obj, int arrayIndex) throws Exception {
-        int id = (int) (long) obj.get("id");
+        long id = (long) obj.get("id");
         Date2 heldAt = Date2.fromJSON((String) obj.get("heldAt"));
         String subjectID = (String) obj.get("subjectId");
         String title = (String) obj.get("title");
         String description = (String) obj.get("description");
         JSONArray rawAttendanceIds = (JSONArray) obj.get("attendanceIds");
         
-        int[] attendanceIds = new int[rawAttendanceIds.size()];
+        long[] attendanceIds = new long[rawAttendanceIds.size()];
         for (int i = 0; i < attendanceIds.length; i++) {
-            attendanceIds[i] = (int) (long) rawAttendanceIds.get(i);
+            attendanceIds[i] = (long) rawAttendanceIds.get(i);
         }
         
         Session sess = new Session(id, heldAt, subjectID, title, description, attendanceIds);
-        sess.setArrayIndex(arrayIndex);
         return sess;
     }
     
@@ -87,15 +93,30 @@ public class Session extends DBEntity {
         obj.put("attendanceIds", jsonAttendanceIds);
         return obj;
     }
-    
+
     @Override
-    public void save() throws Exception {
-        Table table = Database.get("sessions");
-        
-        if (this.arrayIndex == -1) {
-            table.insert(this.toJSON());
-        } else {
-            table.update(this.arrayIndex, this.toJSON());
+    public String getTableName() {
+        return "sessions";
+    }
+
+    @Override
+    public void reload() throws Exception {
+        Session newSess = Session.getById(id);
+        this.attendanceIds = newSess.attendanceIds;
+        this.description = newSess.description;
+        this.heldAt = newSess.heldAt;
+        this.subjectId = newSess.subjectId;
+        this.title = newSess.title;
+    }
+    
+    public void recordAttendance(Attendance att) throws Exception {
+        att.save();
+        long[] newAttendanceIds = new long[this.attendanceIds.length + 1];
+        for (int i = 0; i < this.attendanceIds.length; i++) {
+            newAttendanceIds[i] = this.attendanceIds[i];
         }
+        newAttendanceIds[newAttendanceIds.length - 1] = att.id;
+        this.attendanceIds = newAttendanceIds;
+        this.save();
     }
 }

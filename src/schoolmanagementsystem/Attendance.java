@@ -5,6 +5,7 @@
  */
 package schoolmanagementsystem;
 
+import database.DBEntity;
 import org.json.simple.JSONObject;
 
 /**
@@ -12,14 +13,21 @@ import org.json.simple.JSONObject;
  * @author nedpals
  */
 public class Attendance extends DBEntity {
-    public int id;
-    public int studentId;
-    public int sessionId;
+    public long studentId;
+    public long sessionId;
     public boolean isPresent;
     public String reason;
     public Date2 updatedAt;
     
-    Attendance(int id, int studentId, int sessionId, boolean isPresent, String reason, Date2 updatedAt) {
+    Attendance(long studentId, long sessionId, boolean isPresent, String reason) {
+        this.studentId = studentId;
+        this.sessionId = sessionId;
+        this.isPresent = isPresent;
+        this.reason = reason;
+        this.updatedAt = new Date2();
+    }
+    
+    Attendance(long id, long studentId, long sessionId, boolean isPresent, String reason, Date2 updatedAt) {
         this.id = id;
         this.studentId = studentId;
         this.sessionId = sessionId;
@@ -37,19 +45,14 @@ public class Attendance extends DBEntity {
     }
     
     public static Attendance fromJSON(JSONObject obj) throws Exception {
-        return Attendance.fromJSON(obj, -1);
-    }
-    
-    public static Attendance fromJSON(JSONObject obj, int arrayIndex) throws Exception {
-        int id = (int) (long) obj.get("id");
-        int studentId = (int) (long) obj.get("studentId");
-        int sessionId = (int) (long) obj.get("sessionId");
+        long id = (long) obj.get("id");
+        long studentId = (long) obj.get("studentId");
+        long sessionId = (long) obj.get("sessionId");
         boolean isPresent = (boolean) obj.get("isPresent");
         String reason = (String) obj.get("reason");
         Date2 updatedAt = Date2.fromJSON((String) obj.get("updatedAt"));
         
         Attendance att = new Attendance(id, studentId, sessionId, isPresent, reason, updatedAt);
-        att.setArrayIndex(arrayIndex);
         return att;
     }
     
@@ -61,18 +64,15 @@ public class Attendance extends DBEntity {
         obj.put("sessionId", sessionId);
         obj.put("isPresent", isPresent);
         obj.put("reason", reason);
-        obj.put("updatedAt", updatedAt);
+        obj.put("updatedAt", updatedAt.toJSON());
         return obj;
     }
-    
+
     @Override
-    public void save() throws Exception {
-        Table table = Database.get("attendances");
-        
-        if (this.arrayIndex == -1) {
-            table.insert(this);
-        } else {
-            table.update(this.arrayIndex, this);
-        }
+    public String getTableName() {
+        return "attendances";
     }
+
+    @Override
+    public void reload() throws Exception {}
 }
