@@ -24,6 +24,7 @@ public class AdminEditor extends javax.swing.JFrame {
     
     public AdminEditor(Admin admin) {
         initComponents();
+        if (admin == null) return;
         this.admin = admin;
         this.usernameField.setText(admin.username);
         this.passwordField.setText(admin.getPassword());

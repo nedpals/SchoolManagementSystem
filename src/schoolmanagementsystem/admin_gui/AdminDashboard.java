@@ -5,12 +5,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import schoolmanagementsystem.Admin;
-import database.Database;
-import database.Table;
+import json_database.Database;
+import mysql_database.Table;
 import schoolmanagementsystem.Professor;
 import schoolmanagementsystem.Student;
 import schoolmanagementsystem.Subject;
@@ -242,7 +240,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         int confirmDelete = JOptionPane.showConfirmDialog(rootPane, String.format("You are about to delete %s, are you sure you want to delete this?", dataName));
         if (confirmDelete == JOptionPane.YES_OPTION) {
             try {
-                Table table = Database.get(dataType + "s");
                 switch (dataType) {
                     case "admin":
                         Admin adminData = (Admin) tableModel.getValueAt(dataTable.getSelectedRow(), 2);

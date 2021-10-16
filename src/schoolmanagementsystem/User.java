@@ -5,8 +5,8 @@
  */
 package schoolmanagementsystem;
 
-import database.Database;
-import database.DBEntity;
+import json_database.Database;
+import mysql_database.DBEntity;
 
 /**
  *

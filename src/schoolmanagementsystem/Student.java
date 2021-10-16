@@ -5,8 +5,9 @@
  */
 package schoolmanagementsystem;
 
-import database.Database;
-import database.Table;
+import java.sql.PreparedStatement;
+import mysql_database.Database;
+import mysql_database.Table;
 import java.util.Iterator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -19,23 +20,20 @@ public class Student extends User {
 
     public String name;
     public String section;
-    public String[] subjectIds;
 
     public Student(String username, String password, String name, String section) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.section = section;
-        this.subjectIds = new String[0];
     }
 
-    public Student(long id, String username, String password, String name, String section, String[] subjectIds) {
+    public Student(long id, String username, String password, String name, String section) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
         this.section = section;
-        this.subjectIds = subjectIds;
     }
 
     public static Student fromJSON(JSONObject obj) throws Exception {
@@ -44,37 +42,26 @@ public class Student extends User {
         String studPassword = (String) obj.get("password");
         String studName = (String) obj.get("name");
         String studSection = (String) obj.get("section");
-        JSONArray rawsubjectIds = (JSONArray) obj.get("subjectIds");
 
-        String[] subjectIds = new String[rawsubjectIds.size()];
-        for (int i = 0; i < subjectIds.length; i++) {
-            subjectIds[i] = (String) rawsubjectIds.get(i);
-        }
-
-        return new Student(studId, studUsername, studPassword, studName, studSection, subjectIds);
+        return new Student(studId, studUsername, studPassword, studName, studSection);
     }
 
     public static Student getByUsername(String username) throws Exception {
-        Iterator sessionsIt = Database.get("students").all().iterator();
-        while (sessionsIt.hasNext()) {
-            JSONObject data = (JSONObject) sessionsIt.next();
-            if (data.containsKey("username") && ((String) data.get("username")).equals(username)) {
-                return Student.fromJSON(data);
-            }
+        JSONArray data = Database.get("students").getBy("username = ?", new Object[] {username});
+        if (data.isEmpty()) {
+            throw new Exception("Student not found!");
         }
-        throw new Exception("Student not found!");
+        
+        return Student.fromJSON((JSONObject) data.get(0));
     }
 
     public static Student getByName(String name) throws Exception {
-        Iterator sessionsIt = Database.get("students").all().iterator();
-
-        while (sessionsIt.hasNext()) {
-            JSONObject data = (JSONObject) sessionsIt.next();
-            if (data.containsKey("name") && ((String) data.get("name")).equals(name)) {
-                return Student.fromJSON(data);
-            }
+        JSONArray data = Database.get("students").getBy("name = ?", new Object[] {name});
+        if (data.isEmpty()) {
+            throw new Exception("Student not found!");
         }
-        throw new Exception("Student not found!");
+        
+        return Student.fromJSON((JSONObject) data.get(0));
     }
 
     public static Student login(String username, String password) throws Exception {
@@ -103,71 +90,51 @@ public class Student extends User {
     }
 
     public Subject[] getSubjects() throws Exception {
-        Subject[] subjects = new Subject[subjectIds.length];
-        for (int i = 0; i < subjectIds.length; i++) {
-            subjects[i] = Subject.getById(subjectIds[i]);
+        JSONArray results = Database.get("student_subjects").getBy("student_id = ?", new Object[] {this.id});
+        Subject[] subjects = new Subject[results.size()];
+        for (int i = 0; i < subjects.length; i++) {
+            JSONObject data = (JSONObject) results.get(i);
+            subjects[i] = Subject.getById((String) data.get("subject_id"));
         }
         return subjects;
     }
 
     public static Student getById(long id) throws Exception {
-        Iterator studentIt = Database.get("students").all().iterator();
-
-        while (studentIt.hasNext()) {
-            JSONObject data = (JSONObject) studentIt.next();
-            if (data.containsKey("id") && ((long) data.get("id")) == id) {
-                return Student.fromJSON(data);
-            }
+        JSONArray data = Database.get("students").getBy("id = ?", new Object[] {id});
+        if (data.isEmpty()) {
+            throw new Exception("Student not found!");
         }
-
-        throw new Exception("Session not found!");
+        
+        return Student.fromJSON((JSONObject) data.get(0));
     }
 
     public void addSubject(Subject subject) throws Exception {
-        String[] newSubjectIds = new String[this.subjectIds.length + 1];
-        for (int i = 0; i < this.subjectIds.length; i++) {
-            newSubjectIds[i] = this.subjectIds[i];
-        }
-        newSubjectIds[newSubjectIds.length - 1] = subject.id;
-        this.subjectIds = newSubjectIds;
+        JSONObject ssObj = new JSONObject();
+        ssObj.put("student_id", this.id);
+        ssObj.put("subject_id", subject.id);
+        
+        Table table = Database.get("student_subjects");
+        table.insert(ssObj);
         this.save();
-
-        long[] newstudentIds = new long[subject.studentIds.length + 1];
-        for (int i = 0; i < subject.studentIds.length; i++) {
-            newstudentIds[i] = subject.studentIds[i];
-        }
-        newstudentIds[newstudentIds.length - 1] = this.id;
-        subject.studentIds = newstudentIds;
-        subject.save();
     }
 
     public void dropSubject(Subject subject) throws Exception {
-        String[] newSubjectIds = new String[this.subjectIds.length - 1];
         boolean foundSubject = false;
-        for (int i = 0; i < this.subjectIds.length; i++) {
-            if (this.subjectIds[i].equals(subject.id)) {
+        Subject[] handledSubjects = this.getSubjects();
+        for (int i = 0; i < handledSubjects.length; i++) {
+            if (handledSubjects[i].id.equals(subject.id)) {
                 foundSubject = true;
-                continue;
+                break;
             }
-            newSubjectIds[i] = this.subjectIds[i];
         }
-
+        
         if (!foundSubject) {
             throw new Exception("No subject that matches the list.");
         }
 
-        this.subjectIds = newSubjectIds;
+        Table table = Database.get("student_subjects");
+        table.removeBy("student_id = ? AND subject_id = ?", new Object[] {this.id, subject.id});
         this.save();
-
-        long[] newstudentIds = new long[subject.studentIds.length - 1];
-        for (int i = 0; i < subject.studentIds.length; i++) {
-            if (subject.studentIds[i] == this.id) {
-                continue;
-            }
-            newstudentIds[i] = subject.studentIds[i];
-        }
-        subject.studentIds = newstudentIds;
-        subject.save();
     }
 
     @Override
@@ -178,13 +145,6 @@ public class Student extends User {
         obj.put("password", password);
         obj.put("name", name);
         obj.put("section", section);
-
-        JSONArray jsonsubjectIds = new JSONArray();
-        for (int i = 0; i < subjectIds.length; i++) {
-            jsonsubjectIds.add(i, subjectIds[i]);
-        }
-
-        obj.put("subjectIds", jsonsubjectIds);
         return obj;
     }
 
@@ -198,7 +158,6 @@ public class Student extends User {
         Student newStud = Student.getById(id);
         this.username = newStud.username;
         this.password = newStud.password;
-        this.subjectIds = newStud.subjectIds;
         this.section = newStud.section;
         this.name = newStud.name;
     }
@@ -214,21 +173,16 @@ public class Student extends User {
     }
     
     public static Student[] search(String name) throws Exception {
-        Iterator subjectIt = Database.get("students").all().iterator();
-        Student[] foundStudents = new Student[20];
-        int i = 0;
-        
-        while (subjectIt.hasNext()) {
-            JSONObject data = (JSONObject) subjectIt.next();
-            if (data.containsKey("name") && ((String) data.get("name")).toLowerCase().contains(name)) {
-                foundStudents[i] = Student.fromJSON(data);
-                i++;
-            }
-        }
-
-        if (i == 0) {
+        JSONArray results = Database.get("students").getBy("name LIKE ?", new Object[] {"%" + name + "%"});
+        if (results.isEmpty()) {
             throw new Exception("No results found.");
         }
+        
+        Student[] foundStudents = new Student[results.size()];
+        for (int i = 0; i < foundStudents.length; i++) {
+            foundStudents[i] = Student.fromJSON((JSONObject) results.get(i));
+        }
+
         return foundStudents;
     }
 }

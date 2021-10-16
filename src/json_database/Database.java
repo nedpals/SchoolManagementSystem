@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package database;
+package json_database;
 
 import java.io.File;
 import java.io.FileReader;
@@ -20,7 +20,7 @@ public class Database {
     private static String[] tableNames;
     private static Table[] tables;
     public static Random random = new Random();
-
+  
     private static String checkAndGetTable(String dbPath) throws IOException {
         File dbFile = new File(dbPath);
 

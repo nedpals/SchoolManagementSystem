@@ -6,6 +6,7 @@
 package schoolmanagementsystem.student_gui;
 
 import javax.swing.JOptionPane;
+import schoolmanagementsystem.Attendance;
 import schoolmanagementsystem.Session;
 import schoolmanagementsystem.Subject;
 import schoolmanagementsystem.Student;
@@ -29,6 +30,16 @@ public class StudentSessionView extends javax.swing.JFrame {
         this.subName.setText(subject.name);
         this.sessionTitle.setText(session.title);
         this.sessionContent.setText(session.description);
+        
+        try {
+            Attendance att = session.getAttendanceFromStudent(student.id);
+            presentBtn.setEnabled(att == null || !att.isPresent);
+            notPresentBtn.setEnabled(att == null || att.isPresent);
+        } catch (Exception e) {
+            e.printStackTrace();
+            presentBtn.setEnabled(false);
+            notPresentBtn.setEnabled(false);
+        }
     }
 
     /**

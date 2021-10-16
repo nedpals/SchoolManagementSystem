@@ -5,11 +5,8 @@
  */
 package schoolmanagementsystem;
 
-import database.Database;
-import database.Table;
-import database.DBEntity;
-import java.util.Iterator;
-import java.util.Date;
+import mysql_database.Database;
+import mysql_database.DBEntity;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -18,57 +15,50 @@ import org.json.simple.JSONObject;
  * @author nedpals
  */
 public class Session extends DBEntity {
-    
     public Date2 heldAt;
     public String subjectId;
     public String title;
     public String description;
-    public long[] attendanceIds;
     
     public Session(String subjectId, String title, String description) {
         this.heldAt = new Date2();
         this.subjectId = subjectId;
         this.title = title;
         this.description = description;
-        this.attendanceIds = new long[0];
     }
     
-    Session(long id, Date2 heldAt, String subjectId, String title, String description, long[] attendanceIds) {
+    Session(long id, Date2 heldAt, String subjectId, String title, String description) {
         this.id = id;
         this.heldAt = heldAt;
         this.subjectId = subjectId;
         this.title = title;
         this.description = description;
-        this.attendanceIds = attendanceIds;
     }
     
     public static Session getById(long id) throws Exception {
-        Iterator sessionsIt = Database.get("sessions").all().iterator();
-        
-        while (sessionsIt.hasNext()) {
-            JSONObject data = (JSONObject) sessionsIt.next();
-            if (data.containsKey("id") && ((long) data.get("id")) == id) {
-                return Session.fromJSON(data);
-            }
+        JSONArray data = Database.get("sessions").getBy("id = ?", new Object[] {id});
+        if (data.isEmpty()) {
+            throw new Exception("Session not found!");
         }
         
-        throw new Exception("Session not found!");
+        return Session.fromJSON((JSONObject) data.get(0));
+    }
+    
+    public Attendance getAttendanceFromStudent(long studentId) throws Exception {
+        JSONArray data = Database.get("attendances").getBy("student_id = ? && session_id = ?", new Object[] {studentId, this.id});
+        if (data.isEmpty()) {
+            throw new Exception("Session not found!");
+        }
+        return Attendance.fromJSON((JSONObject) data.get(0));
     }
     
     public static Session fromJSON(JSONObject obj) throws Exception {
         long id = (long) obj.get("id");
-        Date2 heldAt = Date2.fromJSON((String) obj.get("heldAt"));
-        String subjectID = (String) obj.get("subjectId");
+        Date2 heldAt = Date2.fromJSON((String) obj.get("held_at"));
+        String subjectID = (String) obj.get("subject_id");
         String title = (String) obj.get("title");
         String description = (String) obj.get("description");
-        JSONArray rawAttendanceIds = (JSONArray) obj.get("attendanceIds");
-        
-        long[] attendanceIds = new long[rawAttendanceIds.size()];
-        for (int i = 0; i < attendanceIds.length; i++) {
-            attendanceIds[i] = (long) rawAttendanceIds.get(i);
-        }
-        
-        Session sess = new Session(id, heldAt, subjectID, title, description, attendanceIds);
+        Session sess = new Session(id, heldAt, subjectID, title, description);
         return sess;
     }
     
@@ -80,17 +70,10 @@ public class Session extends DBEntity {
     public JSONObject toJSON() {
         JSONObject obj = new JSONObject();
         obj.put("id", id);
-        obj.put("heldAt", heldAt.toJSON());
-        obj.put("subjectId", subjectId);
+        obj.put("held_at", heldAt.toJSON());
+        obj.put("subject_id", subjectId);
         obj.put("title", title);
         obj.put("description", description);
-        
-        JSONArray jsonAttendanceIds = new JSONArray();
-        for (int i = 0; i < attendanceIds.length; i++) {
-            jsonAttendanceIds.add(i, attendanceIds[i]);
-        }
-        
-        obj.put("attendanceIds", jsonAttendanceIds);
         return obj;
     }
 
@@ -102,7 +85,6 @@ public class Session extends DBEntity {
     @Override
     public void reload() throws Exception {
         Session newSess = Session.getById(id);
-        this.attendanceIds = newSess.attendanceIds;
         this.description = newSess.description;
         this.heldAt = newSess.heldAt;
         this.subjectId = newSess.subjectId;
@@ -111,12 +93,5 @@ public class Session extends DBEntity {
     
     public void recordAttendance(Attendance att) throws Exception {
         att.save();
-        long[] newAttendanceIds = new long[this.attendanceIds.length + 1];
-        for (int i = 0; i < this.attendanceIds.length; i++) {
-            newAttendanceIds[i] = this.attendanceIds[i];
-        }
-        newAttendanceIds[newAttendanceIds.length - 1] = att.id;
-        this.attendanceIds = newAttendanceIds;
-        this.save();
     }
 }

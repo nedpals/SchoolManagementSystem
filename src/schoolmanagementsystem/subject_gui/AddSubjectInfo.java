@@ -29,13 +29,20 @@ public class AddSubjectInfo extends javax.swing.JFrame {
         this.subjectUnits.setText(String.valueOf(subject.units));
         this.subjectDescription.setText(subject.description);
         
-        // check if subject id is in handledSubjectIds
-        for (String subjectId : this.student.subjectIds) {
-            if (subjectId.equals(subject.id)) {
-                this.addButton.setEnabled(false);
-                break;
+        try {
+            Subject[] subjects = this.student.getSubjects();
+            
+            // check if subject id is in handledSubjectIds
+            for (Subject handledSubject : subjects) {
+                if (handledSubject.id.equals(subject.id)) {
+                    this.addButton.setEnabled(false);
+                    break;
+                }
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
+        
     }
 
     /**

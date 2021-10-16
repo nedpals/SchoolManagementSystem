@@ -5,9 +5,8 @@
  */
 package schoolmanagementsystem;
 
-import database.Database;
-import database.Table;
-import java.util.Iterator;
+import mysql_database.Database;
+import mysql_database.Table;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -17,23 +16,20 @@ import org.json.simple.JSONObject;
  */
 public class Professor extends User {
     public String name;
-    public String[] handledSubjectIds;
     public String department;
 
     public Professor(String username, String password, String name, String department) {
         this.username = username;
         this.password = password;
         this.name = name;
-        this.handledSubjectIds = new String[0];
         this.department = department;
     }
     
-    Professor(long id, String username, String password, String name, String[] handledSubjectIds, String department) {
+    Professor(long id, String username, String password, String name, String department) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
-        this.handledSubjectIds = handledSubjectIds;
         this.department = department;
     }
 
@@ -42,13 +38,8 @@ public class Professor extends User {
         String profUsername = (String) obj.get("username");
         String profPassword = (String) obj.get("password");
         String profName = (String) obj.get("name");
-        JSONArray profHandledSubjectIds = (JSONArray) obj.get("handledSubjectIds");
-        String[] handledSubjectIds = new String[profHandledSubjectIds.size()];
-        for (int i = 0; i < handledSubjectIds.length; i++) {
-            handledSubjectIds[i] = (String) profHandledSubjectIds.get(i);
-        }
         String profDepartment = (String) obj.get("department");
-        Professor prof = new Professor(profID, profUsername, profPassword, profName, handledSubjectIds, profDepartment);
+        Professor prof = new Professor(profID, profUsername, profPassword, profName, profDepartment);
         return prof;
     }
 
@@ -58,13 +49,6 @@ public class Professor extends User {
         obj.put("username", this.username);
         obj.put("password", this.password);
         obj.put("name", this.name);
-
-        JSONArray jsonHandledSubjectIds = new JSONArray();
-        for (int i = 0; i < this.handledSubjectIds.length; i++) {
-            jsonHandledSubjectIds.add(this.handledSubjectIds[i]);
-        }
-
-        obj.put("handledSubjectIds", jsonHandledSubjectIds);
         obj.put("department", this.department);
         return obj;
     }
@@ -84,16 +68,12 @@ public class Professor extends User {
     }
 
     public static Professor getByUsername(String username) throws Exception {
-        Iterator professorsIt = Database.get("professors").all().iterator();
-
-        while (professorsIt.hasNext()) {
-            JSONObject data = (JSONObject) professorsIt.next();
-            if (data.containsKey("username") && ((String) data.get("username")).equals(username)) {
-                return Professor.fromJSON(data);
-            }
+        JSONArray data = Database.get("professors").getBy("username = ?", new Object[] {username});
+        if (data.isEmpty()) {
+            throw new Exception("Professor not found!");
         }
-
-        throw new Exception("Professor not found!");
+        
+        return Professor.fromJSON((JSONObject) data.get(0));
     }
 
     public static Professor login(String username, String password) throws Exception {
@@ -110,96 +90,80 @@ public class Professor extends User {
     }
 
     public static Professor getById(long id) throws Exception {
-        Iterator professorIt = Database.get("professors").all().iterator();
-
-        while (professorIt.hasNext()) {
-            JSONObject data = (JSONObject) professorIt.next();
-            if (data.containsKey("id") && ((long) data.get("id")) == id) {
-                return Professor.fromJSON(data);
-            }
+        JSONArray results = Database.get("professors").getBy("id = ?", new Object[] {id});
+        if (results.isEmpty()) {
+            throw new Exception("Professor not found!");
         }
 
-        throw new Exception("Professor not found!");
+        return Professor.fromJSON((JSONObject) results.get(0));
     }
 
     public Subject[] getHandledSubjects() throws Exception {
-        Subject[] subjects = new Subject[handledSubjectIds.length];
-        for (int i = 0; i < handledSubjectIds.length; i++) {
-            subjects[i] = Subject.getById(handledSubjectIds[i]);
+        JSONArray results = Database.get("handled_subjects").getBy("professor_id = ?", new Object[] {this.id});
+        Subject[] subjects = new Subject[results.size()];
+        for (int i = 0; i < subjects.length; i++) {
+            JSONObject data = (JSONObject) results.get(i);
+            subjects[i] = Subject.getById((String) data.get("subject_id"));
         }
         return subjects;
     }
 
     public void createSubject(Subject subject) throws Exception {
-        String[] newSubjectIds = new String[this.handledSubjectIds.length + 1];
         boolean foundSubject = false;
-        
-        for (int i = 0; i < this.handledSubjectIds.length; i++) {
-            if (this.handledSubjectIds[i].equals(subject.id)) {
+        Subject[] handledSubjects = this.getHandledSubjects();
+
+        for (int i = 0; i < handledSubjects.length; i++) {
+            if (handledSubjects[i].id.equals(subject.id)) {
                 foundSubject = true;
+                break;
             }
-            
-            newSubjectIds[i] = this.handledSubjectIds[i];
         }
         
         if (foundSubject) {
             throw new Exception("Subject already exists.");
         }
-        
-        newSubjectIds[newSubjectIds.length - 1] = subject.id;
-        this.handledSubjectIds = newSubjectIds;
+
         subject.professorId = this.id;
         subject.save();
-        this.save();
+        
+        JSONObject ssObj = new JSONObject();
+        ssObj.put("professor_id", this.id);
+        ssObj.put("subject_id", subject.id);
+        
+        Table table = Database.get("handled_subjects");
+        table.insert(ssObj);
     }
 
     public void dropSubject(Subject subject) throws Exception {
-        String[] newSubjectIds = new String[this.handledSubjectIds.length - 1];
         boolean foundSubject = false;
-        
-        for (int i = 0; i < this.handledSubjectIds.length; i++) {
-            if (this.handledSubjectIds[i].equals(subject.id)) {
+        Subject[] handledSubjects = this.getHandledSubjects();
+
+        for (int i = 0; i < handledSubjects.length; i++) {
+            if (handledSubjects[i].id.equals(subject.id)) {
                 foundSubject = true;
-                continue;
+                break;
             }
-            newSubjectIds[i] = this.handledSubjectIds[i];
         }
         
         if (!foundSubject) {
             throw new Exception("No subject that matches the list.");
         }
         
-        this.handledSubjectIds = newSubjectIds;
-        this.save();
-        
+        Table table = Database.get("handled_subjects");
+        table.removeBy("professor_id = ? AND subject_id = ?", new Object[] {this.id, subject.id});
         // manually invoke the subject remove method
     }
 
     public void createSession(Subject sub, Session session) throws Exception {
         session.save();
-        long[] newSessionIds = new long[sub.sessionIds.length + 1];
-        for (int i = 0; i < sub.sessionIds.length; i++) {
-            newSessionIds[i] = sub.sessionIds[i];
-        }
-        newSessionIds[newSessionIds.length - 1] = session.id;
-        sub.sessionIds = newSessionIds;
-        sub.save();
     }
 
     public void createNote(Subject sub, Note note) throws Exception {
         note.save();
-        long[] newNoteIds = new long[sub.noteIds.length + 1];
-        for (int i = 0; i < sub.noteIds.length; i++) {
-            newNoteIds[i] = sub.noteIds[i];
-        }
-        newNoteIds[newNoteIds.length - 1] = note.id;
-        sub.noteIds = newNoteIds;
-        sub.save();
     }
 
     public void deleteNote(Subject sub, Note note) throws Exception {
-        Table table = Database.get("notes");
-
+        note.remove();
     }
 
     public void dropStudent(Subject subj, Student stud) throws Exception {
@@ -218,6 +182,5 @@ public class Professor extends User {
         this.password = newProf.password;
         this.name = newProf.name;
         this.department = newProf.department;
-        this.handledSubjectIds = newProf.handledSubjectIds;
     }
 }

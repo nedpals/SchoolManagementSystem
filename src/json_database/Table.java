@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package database;
+package json_database;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class Table {
     private final String jsonFilePath;
     public JSONArray data = new JSONArray();
     
-    Table(String name, JSONArray data, String jsonFilePath) {
+    public Table(String name, JSONArray data, String jsonFilePath) {
         this.name = name;
         this.data = data;
         this.jsonFilePath = jsonFilePath;

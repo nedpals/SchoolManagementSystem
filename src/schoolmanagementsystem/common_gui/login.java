@@ -11,6 +11,8 @@ import schoolmanagementsystem.Student;
 import schoolmanagementsystem.professor_gui.ProfDashboard;
 import schoolmanagementsystem.admin_gui.AdminLogin;
 import schoolmanagementsystem.student_gui.StudentDashboard;
+import schoolmanagementsystem.Admin;
+import schoolmanagementsystem.admin_gui.AdminEditor;
 
 /**
  *
@@ -201,9 +203,24 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void adminLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminLoginButtonActionPerformed
-        AdminLogin adminLogin = new AdminLogin();
-        adminLogin.setVisible(true);
-        this.dispose();
+        try {
+            AdminLogin adminLogin = new AdminLogin();
+            
+            // Check available admins
+            Admin[] admins = Admin.getAll();
+            adminLogin.setVisible(true);
+            this.dispose();
+            
+            if (admins.length == 0) {
+                JOptionPane.showMessageDialog(rootPane, "Admin not found. Setting up account.");
+                
+                AdminEditor adminEditor = new AdminEditor();
+                adminEditor.setVisible(true);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_adminLoginButtonActionPerformed
 
     private void professorToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professorToggleButtonActionPerformed

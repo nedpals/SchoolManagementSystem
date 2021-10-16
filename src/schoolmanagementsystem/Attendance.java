@@ -5,7 +5,7 @@
  */
 package schoolmanagementsystem;
 
-import database.DBEntity;
+import mysql_database.DBEntity;
 import org.json.simple.JSONObject;
 
 /**
@@ -46,11 +46,11 @@ public class Attendance extends DBEntity {
     
     public static Attendance fromJSON(JSONObject obj) throws Exception {
         long id = (long) obj.get("id");
-        long studentId = (long) obj.get("studentId");
-        long sessionId = (long) obj.get("sessionId");
-        boolean isPresent = (boolean) obj.get("isPresent");
+        long studentId = (long) obj.get("student_id");
+        long sessionId = (long) obj.get("session_id");
+        boolean isPresent = (boolean) obj.get("is_present");
         String reason = (String) obj.get("reason");
-        Date2 updatedAt = Date2.fromJSON((String) obj.get("updatedAt"));
+        Date2 updatedAt = Date2.fromJSON((String) obj.get("updated_at"));
         
         Attendance att = new Attendance(id, studentId, sessionId, isPresent, reason, updatedAt);
         return att;
@@ -60,11 +60,11 @@ public class Attendance extends DBEntity {
     public JSONObject toJSON() {
         JSONObject obj = new JSONObject();
         obj.put("id", id);
-        obj.put("studentId", studentId);
-        obj.put("sessionId", sessionId);
-        obj.put("isPresent", isPresent);
+        obj.put("student_id", studentId);
+        obj.put("session_id", sessionId);
+        obj.put("is_present", isPresent);
         obj.put("reason", reason);
-        obj.put("updatedAt", updatedAt.toJSON());
+        obj.put("updated_at", updatedAt.toJSON());
         return obj;
     }
 

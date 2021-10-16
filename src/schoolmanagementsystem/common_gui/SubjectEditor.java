@@ -31,15 +31,15 @@ public class SubjectEditor extends javax.swing.JFrame {
     }
     
     public SubjectEditor(Subject sub) {
-        loadDefaults();
         this.sub = sub;
+        loadDefaults();
     }
     
     public SubjectEditor(Subject sub, String profName) {
-        loadDefaults();
         this.sub = sub;
-        professorSelector.setSelectedItem(profName);
-        professorSelector.setEnabled(false);
+        loadDefaults();
+//        professorSelector.setSelectedItem(profName);
+//        professorSelector.setEnabled(false);
     }
     
     void loadDefaults() {
@@ -89,7 +89,7 @@ public class SubjectEditor extends javax.swing.JFrame {
         professorSelector = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Student Editor");
+        setTitle("Subject Editor");
 
         jLabel2.setText("Name");
 

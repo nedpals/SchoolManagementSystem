@@ -5,8 +5,7 @@
  */
 package schoolmanagementsystem;
 
-import database.Database;
-import java.util.Iterator;
+import mysql_database.Database;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 
@@ -34,6 +33,7 @@ public class Admin extends User {
         return adm;
     }
 
+    @Override
     public JSONObject toJSON() {
         JSONObject obj = new JSONObject();
         obj.put("id", this.id);
@@ -56,16 +56,12 @@ public class Admin extends User {
     }
 
     public static Admin getByUsername(String username) throws Exception {
-        Iterator sessionsIt = Database.get("admins").all().iterator();
-
-        while (sessionsIt.hasNext()) {
-            JSONObject data = (JSONObject) sessionsIt.next();
-            if (data.containsKey("username") && ((String) data.get("username")).equals(username)) {
-                return Admin.fromJSON(data);
-            }
+        JSONArray data = Database.get("admins").getBy("username = ?", new Object[] {username});
+        if (data.isEmpty()) {
+            throw new Exception("Admin not found!");
         }
-
-        throw new Exception("Admin not found!");
+        
+        return Admin.fromJSON((JSONObject) data.get(0));
     }
 
     public static Admin login(String username, String password) throws Exception {

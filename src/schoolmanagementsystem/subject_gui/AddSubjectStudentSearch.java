@@ -7,7 +7,7 @@ package schoolmanagementsystem.subject_gui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import database.Database;
+import json_database.Database;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import schoolmanagementsystem.Student;

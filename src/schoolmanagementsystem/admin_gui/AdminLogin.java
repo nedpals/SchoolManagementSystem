@@ -3,7 +3,7 @@ package schoolmanagementsystem.admin_gui;
 
 import javax.swing.JOptionPane;
 import schoolmanagementsystem.Admin;
-import database.Database;
+import json_database.Database;
 
 public class AdminLogin extends javax.swing.JFrame {
     public AdminLogin() {
@@ -123,6 +123,7 @@ public class AdminLogin extends javax.swing.JFrame {
             dispose();
        } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e.getMessage());
+            e.printStackTrace();
        }
     }//GEN-LAST:event_loginButtonActionPerformed
 

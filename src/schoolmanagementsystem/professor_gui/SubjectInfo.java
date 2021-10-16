@@ -23,7 +23,7 @@ import schoolmanagementsystem.common_gui.SubjectEditor;
 public class SubjectInfo extends javax.swing.JFrame {
 
     Professor professor;
-    Subject subject;
+    public Subject subject;
     private DefaultTableModel sessionModel;
     private DefaultTableModel notesModel;
     private DefaultTableModel studentsModel;
@@ -41,18 +41,16 @@ public class SubjectInfo extends javax.swing.JFrame {
         this.professor = prof;
 
         this.subjectName.setText(subject.name);
-
         SubjectInfo parent = this;
 
         sessionsTable.removeColumn(sessionsTable.getColumnModel().getColumn(2));
         sessionsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
+                deleteSessionBtn.setEnabled(sessionsTable.getSelectedRow() != -1);
                 if (e.getClickCount() == 2 && !e.isConsumed()) {
                     e.consume();
-
                     SessionEditor editor = new SessionEditor((Session) sessionModel.getValueAt(sessionsTable.getSelectedRow(), 2));
                     editor.setVisible(true);
-//                    openEditor(tableModel.getValueAt(subjectTable.getSelectedRow(), 2));
                 }
             }
         });
@@ -60,9 +58,9 @@ public class SubjectInfo extends javax.swing.JFrame {
         notesTable.removeColumn(notesTable.getColumnModel().getColumn(2));
         notesTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
+                deleteNoteBtn.setEnabled(notesTable.getSelectedRow() != -1);
                 if (e.getClickCount() == 2 && !e.isConsumed()) {
                     e.consume();
-//                    openEditor(tableModel.getValueAt(subjectTable.getSelectedRow(), 2));
                     NoteEditor editor = new NoteEditor((Note) notesModel.getValueAt(notesTable.getSelectedRow(), 2));
                     editor.setVisible(true);
                 }
@@ -72,22 +70,10 @@ public class SubjectInfo extends javax.swing.JFrame {
         studentsTable.removeColumn(studentsTable.getColumnModel().getColumn(2));
         studentsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
+                dropStudentBtn.setEnabled(studentsTable.getSelectedRow() != -1);
                 if (e.getClickCount() == 2 && !e.isConsumed()) {
                     e.consume();
-                    
-                    Student selected = (Student) studentsModel.getValueAt(studentsTable.getSelectedRow(), 2);
-                    int confirm = JOptionPane.showConfirmDialog(rootPane, String.format("Do you want to remove %s?", selected.name));
-                    if (confirm == JOptionPane.YES_OPTION) {
-                        try {
-                            JOptionPane.showMessageDialog(rootPane, "Student removed successfully.");
-                            selected.dropSubject(parent.subject);
-                            parent.loadData();
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-                            ex.printStackTrace();
-                        }
-                    }
-//                    openEditor(tableModel.getValueAt(subjectTable.getSelectedRow(), 2));
+                    parent.dropStudent();
                 }
             }
         });
@@ -95,6 +81,21 @@ public class SubjectInfo extends javax.swing.JFrame {
         loadData();
     }
 
+    private void dropStudent() {
+        Student selected = (Student) studentsModel.getValueAt(studentsTable.getSelectedRow(), 2);
+        int confirm = JOptionPane.showConfirmDialog(rootPane, String.format("Do you want to remove %s?", selected.name));
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                JOptionPane.showMessageDialog(rootPane, "Student removed successfully.");
+                selected.dropSubject(this.subject);
+                this.loadStudentsToTable();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
+    }
+    
     void loadData() {
         this.loadSessionsToTable();
         this.loadNotesToTable();
@@ -103,6 +104,7 @@ public class SubjectInfo extends javax.swing.JFrame {
 
     void loadSessionsToTable() {
         try {
+            deleteSessionBtn.setEnabled(false);
             sessionModel.setRowCount(0);
             Session[] sessions = this.subject.getSessions();
             for (int i = 0; i < sessions.length; i++) {
@@ -121,6 +123,7 @@ public class SubjectInfo extends javax.swing.JFrame {
 
     void loadNotesToTable() {
         try {
+            deleteNoteBtn.setEnabled(false);
             notesModel.setRowCount(0);
             Note[] notes = this.subject.getNotes();
             for (int i = 0; i < notes.length; i++) {
@@ -139,6 +142,7 @@ public class SubjectInfo extends javax.swing.JFrame {
 
     void loadStudentsToTable() {
         try {
+            dropStudentBtn.setEnabled(false);
             studentsModel.setRowCount(0);
             Student[] students = this.subject.getStudents();
             for (int i = 0; i < students.length; i++) {
@@ -175,16 +179,19 @@ public class SubjectInfo extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         sessionsTable = new javax.swing.JTable();
         refreshSessionsBtn = new javax.swing.JButton();
+        deleteSessionBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         addNotesBtn = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         notesTable = new javax.swing.JTable();
         refreshNotesBtn = new javax.swing.JButton();
+        deleteNoteBtn = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         addStudentButton = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         studentsTable = new javax.swing.JTable();
         refreshStudentsBtn = new javax.swing.JButton();
+        dropStudentBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -242,12 +249,21 @@ public class SubjectInfo extends javax.swing.JFrame {
             }
         });
 
+        deleteSessionBtn.setText("Delete");
+        deleteSessionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteSessionBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(deleteSessionBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(refreshSessionsBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addSessionsBtn))
@@ -258,7 +274,8 @@ public class SubjectInfo extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addSessionsBtn)
-                    .addComponent(refreshSessionsBtn))
+                    .addComponent(refreshSessionsBtn)
+                    .addComponent(deleteSessionBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
         );
@@ -300,12 +317,21 @@ public class SubjectInfo extends javax.swing.JFrame {
             }
         });
 
+        deleteNoteBtn.setText("Delete");
+        deleteNoteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteNoteBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(deleteNoteBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(refreshNotesBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addNotesBtn))
@@ -316,7 +342,8 @@ public class SubjectInfo extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addNotesBtn)
-                    .addComponent(refreshNotesBtn))
+                    .addComponent(refreshNotesBtn)
+                    .addComponent(deleteNoteBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
         );
@@ -358,23 +385,33 @@ public class SubjectInfo extends javax.swing.JFrame {
             }
         });
 
+        dropStudentBtn.setText("Drop");
+        dropStudentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropStudentBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(388, 388, 388)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dropStudentBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(refreshStudentsBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addStudentButton))
-            .addComponent(jScrollPane4)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addStudentButton)
-                    .addComponent(refreshStudentsBtn))
+                    .addComponent(refreshStudentsBtn)
+                    .addComponent(dropStudentBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
         );
@@ -403,8 +440,8 @@ public class SubjectInfo extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(subjectName)
-                    .addComponent(editSubjButton)
-                    .addComponent(deleteSubjButton))
+                    .addComponent(deleteSubjButton)
+                    .addComponent(editSubjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(profSubjectInfoTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -442,6 +479,8 @@ public class SubjectInfo extends javax.swing.JFrame {
 
     private void editSubjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSubjButtonActionPerformed
         SubjectEditor frame = new SubjectEditor(subject, professor.name);
+        frame.setVisible(true);
+        
         SubjectInfo parent = this;
         frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -450,7 +489,6 @@ public class SubjectInfo extends javax.swing.JFrame {
                 // save the data
             }
         });
-        frame.setEnabled(true);
     }//GEN-LAST:event_editSubjButtonActionPerformed
 
     private void addSessionsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSessionsBtnActionPerformed
@@ -487,11 +525,48 @@ public class SubjectInfo extends javax.swing.JFrame {
         });      
     }//GEN-LAST:event_addStudentButtonActionPerformed
 
+    private void deleteSessionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSessionBtnActionPerformed
+        String dataName = (String) sessionModel.getValueAt(sessionsTable.getSelectedRow(), 0);
+        int confirmDelete = JOptionPane.showConfirmDialog(rootPane, String.format("You are about to delete %s, are you sure you want to delete this?", dataName));
+        if (confirmDelete == JOptionPane.YES_OPTION) {
+            try {
+                Session data = (Session) sessionModel.getValueAt(sessionsTable.getSelectedRow(), 2);
+                data.remove();
+                this.loadSessionsToTable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_deleteSessionBtnActionPerformed
+
+    private void deleteNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteNoteBtnActionPerformed
+        String dataName = (String) notesModel.getValueAt(notesTable.getSelectedRow(), 0);
+        int confirmDelete = JOptionPane.showConfirmDialog(rootPane, String.format("You are about to delete %s, are you sure you want to delete this?", dataName));
+        if (confirmDelete == JOptionPane.YES_OPTION) {
+            try {
+                Note data = (Note) notesModel.getValueAt(notesTable.getSelectedRow(), 2);
+                data.remove();
+                this.loadNotesToTable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage());
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_deleteNoteBtnActionPerformed
+
+    private void dropStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropStudentBtnActionPerformed
+        this.dropStudent();
+    }//GEN-LAST:event_dropStudentBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNotesBtn;
     private javax.swing.JButton addSessionsBtn;
     private javax.swing.JButton addStudentButton;
+    private javax.swing.JButton deleteNoteBtn;
+    private javax.swing.JButton deleteSessionBtn;
     private javax.swing.JButton deleteSubjButton;
+    private javax.swing.JButton dropStudentBtn;
     private javax.swing.JButton editSubjButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

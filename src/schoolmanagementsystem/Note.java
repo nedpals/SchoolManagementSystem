@@ -5,7 +5,7 @@
  */
 package schoolmanagementsystem;
 
-import database.DBEntity;
+import mysql_database.DBEntity;
 import org.json.simple.JSONObject;
 
 /**
@@ -37,16 +37,12 @@ public class Note extends DBEntity {
         return Subject.getById(subjectId);
     }
 
-    public void getProfessor() throws Exception {
-        throw new UnsupportedOperationException("Not implemented yet.");
-    }
-
     public static Note fromJSON(JSONObject obj) throws Exception {
         long id = (long) obj.get("id");
-        String subjectId = (String) obj.get("subjectId");
+        String subjectId = (String) obj.get("subject_id");
         String title = (String) obj.get("title");
         String content = (String) obj.get("content");
-        Date2 updatedAt = Date2.fromJSON((String) obj.get("updatedAt"));
+        Date2 updatedAt = Date2.fromJSON((String) obj.get("updated_at"));
         Note newNote = new Note(id, subjectId, title, content, updatedAt);
         return newNote;
     }
@@ -57,8 +53,8 @@ public class Note extends DBEntity {
         obj.put("id", id);
         obj.put("title", title);
         obj.put("content", content);
-        obj.put("subjectId", subjectId);
-        obj.put("updatedAt", updatedAt.toJSON());
+        obj.put("subject_id", subjectId);
+        obj.put("updated_at", updatedAt.toJSON());
         return obj;
     }
 

@@ -5,7 +5,7 @@
  */
 package schoolmanagementsystem;
 
-import database.Database;
+import mysql_database.Database;
 import schoolmanagementsystem.common_gui.Login;
 
 /**
@@ -18,7 +18,7 @@ public class SchoolManagementSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        Database.connect();
+        Database.connect("root", "");
         Login loginForm = new Login();
         loginForm.setVisible(true);
     }
