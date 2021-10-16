@@ -5,7 +5,8 @@
  */
 package schoolmanagementsystem;
 
-import java.util.Arrays;
+import mysql_database.Database;
+import schoolmanagementsystem.common_gui.Login;
 
 /**
  *
@@ -17,13 +18,8 @@ public class SchoolManagementSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        Database.connect();
-        
-        Professor[] professors = Professor.getAll();
-        for(int i = 0; i<professors.length; i++){
-            System.out.printf("%s %s %s %s %s \n", professors[i].id, professors[i].username, professors[i].name, professors[i].department, Arrays.toString(professors[i].handledSubjectIds));
-        }
-        
+        Database.connect("root", "");
+        Login loginForm = new Login();
+        loginForm.setVisible(true);
     }
-    
 }

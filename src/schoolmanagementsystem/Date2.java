@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -14,13 +14,13 @@ import java.util.Date;
  */
 public class Date2 {
     private Date rawDate;
-    private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
+    private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     
     Date2() {
         this.rawDate = new Date();
     }
     
-    Date2(Date rawDate) {
+    public Date2(Date rawDate) {
         this.rawDate = rawDate;
     }
     

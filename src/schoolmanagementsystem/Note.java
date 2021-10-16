@@ -5,7 +5,7 @@
  */
 package schoolmanagementsystem;
 
-import java.util.Date;
+import mysql_database.DBEntity;
 import org.json.simple.JSONObject;
 
 /**
@@ -13,23 +13,12 @@ import org.json.simple.JSONObject;
  * @author nedpals
  */
 public class Note extends DBEntity {
-    public int id;
     public String subjectId;
-    public int professorId;
     public String title;
     public String content;
     public Date2 updatedAt;
-    private int arrayIndex = -1;
-    
-    Note(int id, String subjectId, String title, String content, Date updatedAt) {
-        this.id = id;
-        this.subjectId = subjectId;
-        this.title = title;
-        this.content = content;
-        this.updatedAt = new Date2(updatedAt);
-    }
-    
-    Note(int id, String subjectId, String title, String content, Date2 updatedAt) {
+
+    Note(long id, String subjectId, String title, String content, Date2 updatedAt) {
         this.id = id;
         this.subjectId = subjectId;
         this.title = title;
@@ -37,46 +26,43 @@ public class Note extends DBEntity {
         this.updatedAt = updatedAt;
     }
 
+    public Note(String subjectId, String title, String content) {
+        this.subjectId = subjectId;
+        this.title = title;
+        this.content = content;
+        this.updatedAt = new Date2();
+    }
+
     public Subject getSubject() throws Exception {
         return Subject.getById(subjectId);
     }
-    
-    public void getProfessor() throws Exception {
-        throw new UnsupportedOperationException("Not implemented yet.");
-    }
-    
+
     public static Note fromJSON(JSONObject obj) throws Exception {
-        return Note.fromJSON(obj, -1);
-    }
-    
-    public static Note fromJSON(JSONObject obj, int arrayIndex) throws Exception {
-        int id = (int) (long) obj.get("id");
-        String subjectId = (String) obj.get("subjectId");
+        long id = (long) obj.get("id");
+        String subjectId = (String) obj.get("subject_id");
         String title = (String) obj.get("title");
         String content = (String) obj.get("content");
-        Date2 updatedAt = Date2.fromJSON((String) obj.get("updatedAt"));
+        Date2 updatedAt = Date2.fromJSON((String) obj.get("updated_at"));
         Note newNote = new Note(id, subjectId, title, content, updatedAt);
-        newNote.setArrayIndex(arrayIndex);
         return newNote;
     }
-    
+
     @Override
     public JSONObject toJSON() {
         JSONObject obj = new JSONObject();
         obj.put("id", id);
-        obj.put("subjectId", subjectId);
-        obj.put("professorId", professorId);
-        obj.put("updatedAt", updatedAt.toJSON());
+        obj.put("title", title);
+        obj.put("content", content);
+        obj.put("subject_id", subjectId);
+        obj.put("updated_at", updatedAt.toJSON());
         return obj;
     }
 
     @Override
-    public void save() throws Exception {
-        Table table = Database.get("notes");
-        if (this.arrayIndex == -1) {
-            table.insert(this);
-        } else {
-            table.update(arrayIndex, this);
-        }
+    public String getTableName() {
+        return "notes";
     }
+
+    @Override
+    public void reload() throws Exception {}
 }
